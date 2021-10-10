@@ -52,3 +52,7 @@ width: 40px; height:40px; margin-right: 15px; margin-left: 10px;
 .log-out{
     border-radius: 18px; top:600px; margin-left: 30%; position: absolute;
 }
+
+#logo{
+    margin-left: 20px;
+}
