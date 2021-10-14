@@ -17,21 +17,17 @@
     <!-- jQuery -->
     <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
 
-    <title>Courses (Admin)</title>
+    <title>Courses Approvals (Admin)</title>
 
     <style>
-        .courses{
+        .registrations{
             border:solid 1px grey;
             width: 94%;
             border-radius: 20px;
             padding: 15px;
             margin-bottom: 20px;
         }
-
-        .new-course{
-            border-radius: 18px; top:600px; margin-left: 35%; position: absolute;
-        }
-
+        
     </style>
 
   </head>
@@ -64,67 +60,57 @@
 
         <ul class="nav nav-tabs" style="margin-left: 21%; margin-top: 30px;">
             <li class="nav-item">
-              <a class="nav-link active" aria-current="page" href="../admin/admin_course.html">All Courses</a>
+              <a class="nav-link" aria-current="page" href="../admin/admin_course.html">All Courses</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="../admin/admin_course_approval.html">Approvals</a>
+              <a class="nav-link active" href="../admin/admin_course_approval.html">Approvals</a>
             </li>
           </ul>
         
         <div style="margin-left: 21%; margin-top: 1%;">
+            <div>
+                <h5><b>Pending Registrations</b></h5>
+            </div>
 
             <!-- For each new instance, just replace this code block with {{Course Nmae}} and {{name}} -->
-            <div class = "courses">
-                <div class = "container">
-                    <div class = "row">
-                        <div class = "col-md-2">
-                            <img src = "https://cdn-icons.flaticon.com/png/512/3422/premium/3422667.png?token=exp=1633841963~hmac=5d213b7e62e4824a43ca62199cc36c66" style="width: 100px; height: 100px; position: inherit; margin: 20px;"> 
-                        </div>
-        
-                        <div class = 'col-md-8'>
-                            <b>HP111: Introduction to HP InkJet Series (Class 4)</b><br><br>
-                            Start Date: 16 Sep 2021<br>
-                            End Date: 16 Nov 2021<br>
-                            Trainer: Glenda <br>
-                            Course Occupancy: 11/60
-                        </div>
-                        
-                        <div class = 'col-md-1'>
-                            <button type="button" class="btn btn-outline-success" style="float: right; border-radius: 20px; margin-left: 20px; margin-top: 100%;">Details</button>
-                        </div>
-                    </div>
-                </div>
+            <h6 style="color: grey; margin-top: 1%;"><b>HP111: Introduction to HP</b></h6>
+            <div class = "registrations">
+                <img src = "https://cdn-icons-png.flaticon.com/512/1077/1077012.png" style="width: 30px; height: 30px; position: inherit; top: 6%; left:22%"> 
+                <b style="margin-left: 10px;">Xu Kai</b>
+                <button type="button" class="btn btn-success" style="float: right; border-radius: 20px; margin-left: 20px;">Approve</button>
+                <img src = 'https://cdn-icons-png.flaticon.com/512/1828/1828665.png' style="width: 25px; height: 25px; float: right;">
             </div>
 
-            <!-- delete this later  -->
-            <div class = "courses">
-                <div class = "container">
-                    <div class = "row">
-                        <div class = "col-md-2">
-                            <img src = "https://cdn-icons.flaticon.com/png/512/3422/premium/3422667.png?token=exp=1633841963~hmac=5d213b7e62e4824a43ca62199cc36c66" style="width: 100px; height: 100px; position: inherit; margin: 20px;"> 
-                        </div>
-        
-                        <div class = 'col-md-8'>
-                            <b>Canon111: Introduction to Canon Pixma Series (Class 6)</b><br><br>
-                            Start Date: 16 Dec 2021<br>
-                            End Date: 16 Jan 2022<br>
-                            Trainer: Li Yin <br>
-                            Course Occupancy: 1/60
-                        </div>
-
-                        <div class = 'col-md-1'>
-                            <button type="button" class="btn btn-outline-success" style="float: right; border-radius: 20px; margin-left: 20px; margin-top: 100%;">Details</button>
-                        </div>
-                    </div>
-                </div>
+            <!-- To be deleted later on, for testing  -->
+            <div class = "registrations">
+                <img src = "https://cdn-icons-png.flaticon.com/512/1077/1077012.png" style="width: 30px; height: 30px; position: inherit; top: 6%; left:22%"> 
+                <b style="margin-left: 10px;">De Kai</b>
+                <button type="button" class="btn btn-success" style="float: right; border-radius: 20px; margin-left: 20px;">Approve</button>
+                <img src = 'https://cdn-icons-png.flaticon.com/512/1828/1828665.png' style="width: 25px; height: 25px; float: right;">
             </div>
 
-            <a class="btn btn-outline-primary new-course" href="../admin/admin_new_course.html" role="button">+ New Course</a>
+            <h6 style="color: grey; margin-top: 1%;"><b>Canon 112: Introduction to Canon</b></h6>
+            <div class = "registrations">
+                <img src = "https://cdn-icons-png.flaticon.com/512/1077/1077012.png" style="width: 30px; height: 30px; position: inherit; top: 6%; left:22%"> 
+                <b style="margin-left: 10px;">Jeremy</b>
+                <button type="button" class="btn btn-success" style="float: right; border-radius: 20px; margin-left: 20px;">Approve</button>
+                <img src = 'https://cdn-icons-png.flaticon.com/512/1828/1828665.png' style="width: 25px; height: 25px; float: right;">
+            </div>
+
+            <div class = "registrations">
+                <img src = "https://cdn-icons-png.flaticon.com/512/1077/1077012.png" style="width: 30px; height: 30px; position: inherit; top: 6%; left:22%"> 
+                <b style="margin-left: 10px;">Wei Jie</b>
+                <button type="button" class="btn btn-success" style="float: right; border-radius: 20px; margin-left: 20px;">Approve</button>
+                <img src = 'https://cdn-icons-png.flaticon.com/512/1828/1828665.png' style="width: 25px; height: 25px; float: right;">
+            </div>
 
         </div>
 
     </div>
 
+    <script>
+
+    </script>
 
   </body>
 </html>
