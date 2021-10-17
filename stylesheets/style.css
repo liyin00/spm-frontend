@@ -7,7 +7,7 @@ body{
 /* The sidebar menu */
 .sidenav {
 height: 100%; /* Full-height: remove this if you want "auto" height */
-width: 250px; /* Set the width of the sidebar */
+width: 230px; /* Set the width of the sidebar */
 position: fixed; /* Fixed Sidebar (stay in place on scroll) */
 z-index: 1; /* Stay on top */
 top: 0; /* Stay at the top */
@@ -18,7 +18,7 @@ padding-top: 20px;
 }
 
 /* The navigation menu links */
-.sidenav a {
+.sidenav a:not(.log-out) {
 padding: 6px 8px 6px 16px;
 text-decoration: none;
 font-size: 25px;
@@ -28,7 +28,7 @@ padding:20px;
 }
 
 /* When you mouse over the navigation links, change their color */
-.sidenav a:hover {
+.sidenav :not(.log-out):hover{
 color: #f1f1f1;
 background-color: #0A3042;
 }
@@ -50,9 +50,18 @@ width: 40px; height:40px; margin-right: 15px; margin-left: 10px;
 }
 
 .log-out{
-    border-radius: 18px; top:600px; margin-left: 30%; position: absolute;
+    border-radius: 18px; top:550px; margin-left: 30%; position: absolute;
 }
+
 
 #logo{
     margin-left: 20px;
+}
+
+.search-icon{
+    width: 20px; height: 20px; position: absolute; top: 7%; left:23%
+}
+
+.back-icon{
+    margin-left: 20%; width: 30px; height: 30px; margin-top: 1%;
 }

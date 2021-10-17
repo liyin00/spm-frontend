@@ -21,13 +21,31 @@
 
     <style>
         .registrations{
-            border:solid 1px grey;
-            width: 94%;
-            border-radius: 20px;
-            padding: 15px;
-            margin-bottom: 20px;
+          border:solid 1px grey;
+          width: 96%;
+          border-radius: 20px;
+          padding: 15px;
+          margin-bottom: 20px;
         }
         
+        .user-icon{
+          width: 30px; 
+          height: 30px; 
+          position: inherit; 
+          top: 6%; left:22%
+        }
+
+        .approve{
+          float: right; 
+          border-radius: 20px; 
+          margin-left: 20px;
+        }
+
+        .reject{
+          width: 25px; 
+          height: 25px; 
+          float: right;
+        }
     </style>
 
   </head>
@@ -41,8 +59,8 @@
       <a href="../admin/admin_home.html" style="margin-top: 20px;"><img src = 'https://cdn-icons-png.flaticon.com/512/609/609803.png' class='navbar-icons'>Home</a>
       <a href="../admin/admin_course.html"><img src = 'https://cdn-icons-png.flaticon.com/512/2232/2232688.png' class = 'navbar-icons'>Courses</a>
       <a href="../admin/admin_users.html"><img src = 'https://cdn-icons-png.flaticon.com/512/2922/2922510.png' class = 'navbar-icons'>Users</a>
-      <a href="#"><img src = 'https://cdn-icons-png.flaticon.com/512/3132/3132084.png' class = 'navbar-icons'>Settings</a>
-      <button type="button" class="btn btn-outline-danger log-out">Log Out</button>
+      <a href = ''><img src = 'https://cdn-icons-png.flaticon.com/512/3132/3132084.png' class = 'navbar-icons'>Settings</a>
+      <a href="../general/landing.html" button type="button" class="btn btn-outline-danger log-out">Log Out</button></a>
     </div>
 
     <div class = "container-fluid">
@@ -51,8 +69,8 @@
         <div class = "row" style="margin-left: 20%;">
             <form>
                 <div class = "form-group" style="margin-top: 3%; ">
-                    <input type="email" class="form-control" id="searchbar" placeholder="Search courses" style="border: solid 1px grey; width: 95%; padding: 8px; border-radius: 20px; padding-left: 40px;">
-                    <img src = "https://cdn-icons-png.flaticon.com/512/482/482631.png" style="width: 20px; height: 20px; position: absolute; top: 6%; left:22%">
+                  <input type="email" class="form-control" id="searchbar" placeholder="Search courses" style="border: solid 1px grey; width: 95%; padding: 8px; border-radius: 20px; padding-left: 45px;">
+                    <img src = "https://cdn-icons-png.flaticon.com/512/482/482631.png" class = 'search-icon'>
                     </div>
                 </div>
             </form>
@@ -75,32 +93,33 @@
             <!-- For each new instance, just replace this code block with {{Course Nmae}} and {{name}} -->
             <h6 style="color: grey; margin-top: 1%;"><b>HP111: Introduction to HP</b></h6>
             <div class = "registrations">
-                <img src = "https://cdn-icons-png.flaticon.com/512/1077/1077012.png" style="width: 30px; height: 30px; position: inherit; top: 6%; left:22%"> 
+                <img src = "https://cdn-icons-png.flaticon.com/512/1077/1077012.png" class = 'user-icon'> 
                 <b style="margin-left: 10px;">Xu Kai</b>
-                <button type="button" class="btn btn-success" style="float: right; border-radius: 20px; margin-left: 20px;">Approve</button>
-                <img src = 'https://cdn-icons-png.flaticon.com/512/1828/1828665.png' style="width: 25px; height: 25px; float: right;">
+                <button type="button" class="btn btn-outline-success approve">Approve</button>
+                <img src = 'https://cdn-icons-png.flaticon.com/512/1828/1828665.png' class = 'reject'>
             </div>
-
+            
             <!-- To be deleted later on, for testing  -->
             <div class = "registrations">
                 <img src = "https://cdn-icons-png.flaticon.com/512/1077/1077012.png" style="width: 30px; height: 30px; position: inherit; top: 6%; left:22%"> 
                 <b style="margin-left: 10px;">De Kai</b>
-                <button type="button" class="btn btn-success" style="float: right; border-radius: 20px; margin-left: 20px;">Approve</button>
+                <button type="button" class="btn btn-outline-success" style="float: right; border-radius: 20px; margin-left: 20px;">Approve</button>
                 <img src = 'https://cdn-icons-png.flaticon.com/512/1828/1828665.png' style="width: 25px; height: 25px; float: right;">
             </div>
 
             <h6 style="color: grey; margin-top: 1%;"><b>Canon 112: Introduction to Canon</b></h6>
             <div class = "registrations">
-                <img src = "https://cdn-icons-png.flaticon.com/512/1077/1077012.png" style="width: 30px; height: 30px; position: inherit; top: 6%; left:22%"> 
-                <b style="margin-left: 10px;">Jeremy</b>
-                <button type="button" class="btn btn-success" style="float: right; border-radius: 20px; margin-left: 20px;">Approve</button>
-                <img src = 'https://cdn-icons-png.flaticon.com/512/1828/1828665.png' style="width: 25px; height: 25px; float: right;">
-            </div>
+              <img src = "https://cdn-icons-png.flaticon.com/512/1077/1077012.png" class = 'user-icon'> 
+              <b style="margin-left: 10px;">Jeremy</b>
+              <button type="button" class="btn btn-outline-success approve">Approve</button>
+              <img src = 'https://cdn-icons-png.flaticon.com/512/1828/1828665.png' class = 'reject'>
+          </div>
+          
 
             <div class = "registrations">
                 <img src = "https://cdn-icons-png.flaticon.com/512/1077/1077012.png" style="width: 30px; height: 30px; position: inherit; top: 6%; left:22%"> 
                 <b style="margin-left: 10px;">Wei Jie</b>
-                <button type="button" class="btn btn-success" style="float: right; border-radius: 20px; margin-left: 20px;">Approve</button>
+                <button type="button" class="btn btn-outline-success" style="float: right; border-radius: 20px; margin-left: 20px;">Approve</button>
                 <img src = 'https://cdn-icons-png.flaticon.com/512/1828/1828665.png' style="width: 25px; height: 25px; float: right;">
             </div>
 

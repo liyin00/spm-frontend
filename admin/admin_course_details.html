@@ -1,0 +1,110 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-uWxY/CJNBR+1zjPWmfnSnVxwRheevXITnMqoEIeG1LJrdI0GlVs/9cVSyPYXdcSF" crossorigin="anonymous">
+
+    <!--Link to external CSS-->
+    <link rel="stylesheet" href="../stylesheets/style.css">
+    
+    <!-- Axios -->
+    <script src="https://unpkg.com/axios/dist/axios.js"></script>
+    
+    <!-- jQuery -->
+    <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+
+    <title>Course Details</title>
+
+    <style>
+        .course-description{
+            margin-left: 25%;
+        }
+
+        .course-details{
+            margin: 0px; padding: 0px;
+        }
+
+        .enrolled{
+            border:solid 1px grey;
+            width: 90%;
+            border-radius: 20px;
+            padding: 10px;
+            margin-bottom: 20px;
+        }
+
+        .enrolled-user-icon{
+            width: 30px; 
+            height: 30px; 
+            position: inherit; 
+            top: 6%; 
+            left:22%
+        }
+
+        .drop-enrolled{
+            width: 25px; 
+            height: 
+            25px; 
+            float: right; 
+            margin-right: 20px;
+        }
+    </style>
+
+  </head>
+  <body>
+
+    <!-- Option 1: Bootstrap Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-kQtW33rZJAHjgefvhyyzcGF3C5TFyBQBA13V1RKPf4uH+bwyzQxZ6CmMZHmNBEfJ" crossorigin="anonymous"></script>
+    
+    <div class="sidenav">
+      <img src='../img-sources/company-logo.png' style="width: 180px; height:60px; margin-right: 15px; padding-left: 0px;" id = 'logo'>
+      <a href="../admin/admin_home.html" style="margin-top: 20px;"><img src = 'https://cdn-icons-png.flaticon.com/512/609/609803.png' class='navbar-icons'>Home</a>
+      <a href="../admin/admin_course.html"><img src = 'https://cdn-icons-png.flaticon.com/512/2232/2232688.png' class = 'navbar-icons'>Courses</a>
+      <a href="../admin/admin_users.html"><img src = 'https://cdn-icons-png.flaticon.com/512/2922/2922510.png' class = 'navbar-icons'>Users</a>
+      <a href="#"><img src = 'https://cdn-icons-png.flaticon.com/512/3132/3132084.png' class = 'navbar-icons'>Settings</a>
+      <a href="../general/landing.html" button type="button" class="btn btn-outline-danger log-out">Log Out</button></a>
+    </div>
+
+    <a href = '../admin/admin_course.html'><img src = "https://cdn-icons-png.flaticon.com/512/786/786399.png" class = 'back-icon'></a>
+
+    <div class = 'course-description'>
+        <h3><b>HP 111: Introduction to HP InkJet Series (Class 4)</b></h3>
+        <div class = 'container-fluid course-details'>
+            <div class = 'row'>
+                <div class = 'col-md-4'>
+                    Start Date: 16 Sep 2021 <br>
+                    End Date: 20 Nov 2021 <br>
+                    Trainer: Glenda <br>
+                    Course Occupancy: 11/40
+                </div>
+                <div class = 'col-md-5'>
+                    Prerequisites: 
+                    <ul>
+                        <li>PRT111: Introduction to Printing</li>
+                        <li>PRT222: Simple Printing Configuration</li>
+                    </ul>
+                </div>
+            </div>
+            <br>
+        </div>
+        <h5><b>Class List</b></h5>
+
+        <div class = 'enrolled'>
+            <img src = "https://cdn-icons-png.flaticon.com/512/1077/1077012.png" class = 'enrolled-user-icon'> 
+            <b style="margin-left: 20px;">Xu Kai</b>
+            <img src = 'https://cdn-icons-png.flaticon.com/512/1828/1828665.png' class = 'drop-enrolled'>
+        </div>
+
+        <!--Can just remove, testing reproductivity-->
+        <div class = 'enrolled'>
+            <img src = "https://cdn-icons-png.flaticon.com/512/1077/1077012.png" class = 'enrolled-user-icon'> 
+            <b style="margin-left: 20px;">Xu Kai</b>
+            <img src = 'https://cdn-icons-png.flaticon.com/512/1828/1828665.png' class = 'drop-enrolled'>
+        </div>
+        
+    </div>
+  </body>
+</html>
