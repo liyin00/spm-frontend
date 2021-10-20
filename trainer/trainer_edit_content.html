@@ -1,0 +1,293 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-uWxY/CJNBR+1zjPWmfnSnVxwRheevXITnMqoEIeG1LJrdI0GlVs/9cVSyPYXdcSF" crossorigin="anonymous">
+
+    <!--Link to external CSS-->
+    <link rel="stylesheet" href="../stylesheets/style.css">
+
+    <title>Template (Admin)</title>
+
+    <style>
+        /* The sidebar menu */
+        .sidebar {
+            height: 100%; /* 100% Full-height */
+            width: 0; /* 0 width - change this with JavaScript */
+            position: fixed; /* Stay in place */
+            z-index: 1; /* Stay on top */
+            top: 0;
+            right: 0;
+            background-color: #b0dfe5; 
+            overflow-x: hidden; /* Disable horizontal scroll */
+            padding-top: 60px; /* Place content 60px from the top */
+            transition: 0.5s; /* 0.5 second transition effect to slide in the sidebar */
+        }
+
+        /* The sidebar links */
+        .sidebar a {
+            padding: 8px 8px 8px 32px;
+            text-decoration: none;
+            color: #818181;
+            display: block;
+            transition: 0.3s;
+        }
+
+        /* When you mouse over the navigation links, change their color */
+        .sidebar a:hover {
+            color: white; 
+        }
+
+        /* Position and style the close button (top right corner) */
+        .sidebar .closebtn {
+            position: absolute;
+            top: 0;
+            right: 25px;
+            font-size: 36px;
+            margin-left: 50px;
+        }
+
+        #section-name{
+            display:none;
+        }
+
+        #section-input{
+            border: 1px solid grey; 
+            border-radius: 10px; 
+            padding-left: 5%; 
+            margin-bottom: 3%;
+        }
+
+        #choose-section{
+            display:none;
+        }
+
+        #delete-section{
+            display:none;
+        }
+
+        a:link {
+            text-decoration:none;
+        }
+        a:hover {
+            text-decoration: none;
+        }
+
+        a{
+            color: grey;
+        }
+
+        #quiz-name{
+            display:none;
+        }
+
+        #choose-quiz-section{
+            display:none;
+        }
+
+        #quiz-input{
+            border: 1px solid grey; 
+            border-radius: 10px; 
+            padding-left: 5%; 
+            margin-bottom: 3%;
+        }
+
+        #graded-quiz-name{
+            display: none;
+        }
+
+        #choose-graded-quiz-section{
+            display: none;
+        }
+
+        #graded-quiz-input{
+            border: 1px solid grey; 
+            border-radius: 10px; 
+            padding-left: 5%; 
+            margin-bottom: 3%;
+        }
+
+        #release-section{
+            display: none;
+        }
+    </style>
+
+  </head>
+  <body>
+
+    <!-- Option 1: Bootstrap Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-kQtW33rZJAHjgefvhyyzcGF3C5TFyBQBA13V1RKPf4uH+bwyzQxZ6CmMZHmNBEfJ" crossorigin="anonymous"></script>
+    
+    <div class="sidenav">
+      <img src='../img-sources/company-logo.png' style="width: 180px; height:60px; margin-right: 15px; padding-left: 0px;">
+      <a href="../trainer/trainer_home.html" style="margin-top: 20px;"><img src = 'https://cdn-icons-png.flaticon.com/512/609/609803.png' class='navbar-icons' id = 'logo'>Home</a>
+      <a href="../trainer/trainer_course.html"><img src = 'https://cdn-icons-png.flaticon.com/512/2232/2232688.png' class = 'navbar-icons'>Courses</a>
+      <a href="#"><img src = 'https://cdn-icons-png.flaticon.com/512/1041/1041916.png' class = 'navbar-icons'>Messages</a>
+      <a href="#"><img src = 'https://cdn-icons-png.flaticon.com/512/2025/2025202.png' class = 'navbar-icons'>Forums</a>
+      <a href="#"><img src = 'https://cdn-icons-png.flaticon.com/512/3132/3132084.png' class = 'navbar-icons'>Settings</a>
+      <a href="../general/landing.html" button type="button" class="btn btn-outline-danger log-out">Log Out</button></a>
+    </div>
+
+    <a href = '../trainer/trainer_edit_course_main.html'><img src = "https://cdn-icons-png.flaticon.com/512/786/786399.png" class = 'back-icon'></a>
+
+    <!-- title  -->
+    <div style="margin-left: 25%;">
+        <h4 style="margin-bottom: 30px;">
+            <b>HP 111: Introduction to InkJet Series</b>
+            <button type="button" class="openbtn btn btn-success" style="border-radius: 20px; width: 80px; float: right; margin-right: 25px;" onclick="openNav()">Edit</button>
+        </h4>
+    
+        <h6>A beginner's guide to InkJet Series</h6>
+        <ul style="list-style-type:none;">
+            <a href ='../trainer/trainer_section_contents.html'><li>Lesson Materials</li></a>
+            <a href ='#quizName'><li>Quiz 1: InkJet Basics</li></a>
+        </ul>  
+
+        <!--Testing for reproductivity, delete afterwards-->
+        <h6>An intermediate guide to InkJet Series</h6>
+        <ul style="list-style-type:none;">
+            <a href = '../trainer/trainer_section_contents.html'><li>Lesson Materials</li></a>
+            <a href = '#'><li>Quiz 2: InkJet Basic Configuration</li></a>
+        </ul>  
+
+        <a href = '#'><h6>Final Quiz: Mastering InkJet</h6></a>
+
+        <div id="mySidebar" class="sidebar">
+            <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+
+            <!-- naming sections -->
+            <a href="#" onclick = 'createSection()'>Create Section</a>
+            <!-- this is the input for section name -->
+            <div class="section-name" style="text-align: center;" id = 'section-name'>
+                <form action="#">
+                  <input type="text" placeholder="New section name" name="sectionName" id = 'section-input'>
+                  <button class = 'btn btn-light'type="submit" style="border-radius: 20px; font-size: 13px;" onclick="selectSection()">Create</button>
+                </form>
+            </div>
+
+            <!-- choose section location -->
+            <div id = 'choose-section'>
+                <text style="margin-left: 35px; font-size: 13px;">Choose section location:</text>
+                <a href = '#' style="margin-left: 15px; font-size: 13px;">Root</a>
+                <a href = '#' style="margin-left: 15px; font-size: 13px;">A beginner's guide to InkJet Series</a>
+            </div>
+
+            <a href="#" onclick="deleteSection()">Delete Section</a>
+
+            <div id = 'delete-section' style="margin-left: 35px;">
+                <input type="checkbox" name="section1" value="is111">
+                <label for="section1"> IS111</label><br>
+                <input type="checkbox" name="section2" value="is222">
+                <label for="section1"> IS222</label><br>
+                <div style="text-align: center;">
+                    <button class = 'btn btn-danger'type="submit" style="border-radius: 20px; font-size: 13px;" onclick="completeDelete()">Delete</button>
+                </div>
+            </div>
+
+            <!-- add ungraded quiz  -->
+            <a href="#" onclick="addQuiz()">Add ungraded quiz</a>
+            <div class="quiz-name" style="text-align: center;" id = 'quiz-name'>
+                <form action="#">
+                  <input type="text" placeholder="New section name" name="quizName" id = 'quiz-input'>
+                  <button class = 'btn btn-light'type="submit" style="border-radius: 20px; font-size: 13px;" onclick="selectQuizLocation()">Create</button>
+                </form>
+            </div>
+
+            <!-- choose section location for ungraded quiz-->
+            <div id = 'choose-quiz-section'>
+                <text style="margin-left: 35px; font-size: 13px;">Choose section location:</text>
+                <a href = '#' style="margin-left: 15px; font-size: 13px;" onclick = createQuiz()>Root</a>
+                <a href = '#' style="margin-left: 15px; font-size: 13px;" onclick = createQuiz()>A beginner's guide to InkJet Series</a>
+            </div>
+
+            <!-- add graded quiz  -->
+            <a href="#" onclick = "addGradedQuiz()">Add graded quiz</a>
+            <div class="graded-quiz-name" style="text-align: center;" id = 'graded-quiz-name'>
+                <form action="#">
+                  <input type="text" placeholder="New quiz name" name="quizName" id = 'graded-quiz-input'>
+                  <button class = 'btn btn-light'type="submit" style="border-radius: 20px; font-size: 13px;" onclick="selectGradedQuizLocation()">Create</button>
+                </form>
+            </div>
+
+            <!-- choose section location for graded quiz-->
+            <div id = 'choose-graded-quiz-section'>
+                <text style="margin-left: 35px; font-size: 13px;">Choose section location:</text>
+                <a href = '#' style="margin-left: 15px; font-size: 13px;" onclick = createQuiz()>Root</a>
+                <a href = '#' style="margin-left: 15px; font-size: 13px;" onclick = createQuiz()>A beginner's guide to InkJet Series</a>
+            </div>
+
+            <!-- release materials  -->
+            <a href="#" onclick = 'releaseSection()'>Release Section</a>
+            <div id = 'release-section'>
+                <text style="margin-left: 35px; font-size: 13px;">Choose section to release:</text>
+                <a href = '#' style="margin-left: 15px; font-size: 13px;">A beginner's guide to InkJet Series</a>
+                <a href = '#' style="margin-left: 15px; font-size: 13px;">An intermediate guide to InkJet Series</a>
+            </div>
+
+        </div>
+
+
+    </div>
+
+    <script>
+        /* Set the width of the sidebar to 250px and the left margin of the page content to 250px */
+        function openNav() {
+            document.getElementById("mySidebar").style.width = "250px";
+            document.getElementById("main").style.marginLeft = "250px";
+        }
+
+        /* Set the width of the sidebar to 0 and the left margin of the page content to 0 */
+        function closeNav() {
+            document.getElementById("mySidebar").style.width = "0";
+            document.getElementById("main").style.marginLeft = "0";
+        }
+
+        function createSection(){
+            document.getElementById("section-name").style.display = 'block';
+        }
+
+        function selectSection(){
+            document.getElementById("section-name").style.display = 'none';
+            document.getElementById("choose-section").style.display = 'block';
+        }
+
+        function deleteSection(){
+            document.getElementById("delete-section").style.display = 'block';
+        }
+
+        function completeDelete(){
+            document.getElementById("delete-section").style.display = 'none';
+        }
+
+        function addQuiz(){
+            document.getElementById("quiz-name").style.display = 'block';
+        }
+
+        function selectQuizLocation(){
+            document.getElementById("quiz-name").style.display = 'none';
+            document.getElementById("choose-quiz-section").style.display = 'block';
+        }
+
+        function addGradedQuiz(){
+            document.getElementById("graded-quiz-name").style.display = 'block';
+        }
+
+        function selectGradedQuizLocation(){
+            document.getElementById("graded-quiz-name").style.display = 'none';
+            document.getElementById("choose-graded-quiz-section").style.display = 'block';
+        }
+
+        function releaseSection(){
+            document.getElementById("release-section").style.display = 'block';
+        }
+
+        function createQuiz(){
+            window.location.replace("../trainer/trainer_new_quiz.html")
+        }
+    </script>
+  </body>
+</html>

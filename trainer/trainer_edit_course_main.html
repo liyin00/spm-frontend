@@ -13,7 +13,22 @@
 
     <title>Courses (Admin)</title>
 
+    <style>
+        #edit-btn{
+            float: right; 
+            border-radius: 20px; 
+            margin-left: 20px; 
+            margin-top: 100%; 
+            width: 80px;
+        }
 
+        #listing-pic{
+            width: 100px; 
+            height: 100px; 
+            position: inherit; 
+            margin: 20px;
+        }
+    </style>
   </head>
   <body>
 
@@ -45,13 +60,13 @@
 
         <ul class="nav nav-tabs" style="margin-left: 21%; margin-top: 30px;">
             <li class="nav-item">
-              <a class="nav-link active" aria-current="page" href="../trainer/trainer_course.html">Ongoing</a>
+              <a class="nav-link" href="../trainer/trainer_course.html">Ongoing</a>
             </li>
             <li class="nav-item">
               <a class="nav-link" href="../trainer/trainer_released_courses.html">Released</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="../trainer/trainer_edit_course_main.html">Editing</a>
+                <a class="nav-link active" aria-current="page" href="../trainer/trainer_editing_course.html">Editing</a>
               </li>
         </ul>
         
@@ -62,7 +77,7 @@
                 <div class = "container">
                     <div class = "row">
                         <div class = "col-md-2">
-                            <img src = "https://sg.canon/media/image/2020/08/26/e0974bdc54d445039d4e3db2301b0c73_E34xx_AS_FR_cl2_blk_en-362x320.png" style="width: 100px; height: 100px; position: inherit; margin: 20px;"> 
+                            <img src = "https://sg.canon/media/image/2020/08/26/e0974bdc54d445039d4e3db2301b0c73_E34xx_AS_FR_cl2_blk_en-362x320.png" id = 'listing-pic'> 
                         </div>
         
                         <div class = 'col-md-8'>
@@ -74,30 +89,7 @@
                         </div>
                         
                         <div class = 'col-md-1'>
-                            <a href = '../trainer/trainer_course_details.html' button type="button" class="btn btn-outline-success" style="float: right; border-radius: 20px; margin-left: 20px; margin-top: 100%;">Details</button></a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- delete this later  -->
-            <div class = "courses">
-                <div class = "container">
-                    <div class = "row">
-                        <div class = "col-md-2">
-                            <img src = "https://sg.canon/media/image/2020/08/26/e0974bdc54d445039d4e3db2301b0c73_E34xx_AS_FR_cl2_blk_en-362x320.png" style="width: 100px; height: 100px; position: inherit; margin: 20px;"> 
-                        </div>
-        
-                        <div class = 'col-md-8'>
-                            <b>Canon111: Introduction to Canon Pixma Series (Class 6)</b><br><br>
-                            Start Date: 16 Dec 2021<br>
-                            End Date: 16 Jan 2022<br>
-                            Trainer: Li Yin <br>
-                            Course Occupancy: 1/60
-                        </div>
-
-                        <div class = 'col-md-1'>
-                            <a href = '#' button type="button" class="btn btn-outline-success" style="float: right; border-radius: 20px; margin-left: 20px; margin-top: 100%;">Details</button></a>
+                            <a href = '../trainer/trainer_edit_content.html' button type="button" class="btn btn-outline-success" id = 'edit-btn'>Edit</button></a>
                         </div>
                     </div>
                 </div>
