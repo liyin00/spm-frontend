@@ -1,0 +1,177 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-uWxY/CJNBR+1zjPWmfnSnVxwRheevXITnMqoEIeG1LJrdI0GlVs/9cVSyPYXdcSF" crossorigin="anonymous">
+
+    <!--Link to external CSS-->
+    <link rel="stylesheet" href="../stylesheets/style.css">
+    
+    <!-- Axios -->
+    <script src="https://unpkg.com/axios/dist/axios.js"></script>
+    
+    <!-- jQuery -->
+    <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+
+    <title>Add New Course (Admin)</title>
+    
+    <style>
+      .dropdown-check-list {
+        display: inline-block;
+      }
+
+      .dropdown-check-list .anchor {
+        position: relative;
+        cursor: pointer;
+        display: inline-block;
+        padding: 5px 50px 5px 10px;
+        border: 1px solid #ccc;
+      }
+
+      .dropdown-check-list .anchor:after {
+        position: absolute;
+        content: "";
+        border-left: 2px solid black;
+        border-top: 2px solid black;
+        padding: 5px;
+        right: 10px;
+        top: 20%;
+        -moz-transform: rotate(-135deg);
+        -ms-transform: rotate(-135deg);
+        -o-transform: rotate(-135deg);
+        -webkit-transform: rotate(-135deg);
+        transform: rotate(-135deg);
+      }
+
+      .dropdown-check-list .anchor:active:after {
+        right: 8px;
+        top: 21%;
+      }
+
+      .dropdown-check-list ul.items {
+        padding: 2px;
+        display: none;
+        margin: 0;
+        border: 1px solid #ccc;
+        border-top: none;
+      }
+
+      .dropdown-check-list ul.items li {
+        list-style: none;
+      }
+
+      .dropdown-check-list.visible .anchor {
+        color: #0094ff;
+      }
+
+      .dropdown-check-list.visible .items {
+        display: block;
+      }
+    </style>
+
+  </head>
+  <body>
+
+    <!-- Option 1: Bootstrap Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-kQtW33rZJAHjgefvhyyzcGF3C5TFyBQBA13V1RKPf4uH+bwyzQxZ6CmMZHmNBEfJ" crossorigin="anonymous"></script>
+    
+    <div class="sidenav">
+      <img src='../img-sources/company-logo.png' style="width: 180px; height:60px; margin-right: 15px; padding-left: 0px;" id = 'logo'>
+      <a href="../admin/admin_home.html" style="margin-top: 20px;"><img src = 'https://cdn-icons-png.flaticon.com/512/609/609803.png' class='navbar-icons'>Home</a>
+      <a href="../admin/admin_course.html"><img src = 'https://cdn-icons-png.flaticon.com/512/2232/2232688.png' class = 'navbar-icons'>Courses</a>
+      <a href="../admin/admin_users.html"><img src = 'https://cdn-icons-png.flaticon.com/512/2922/2922510.png' class = 'navbar-icons'>Users</a>
+      <a href="#"><img src = 'https://cdn-icons-png.flaticon.com/512/3132/3132084.png' class = 'navbar-icons'>Settings</a>
+      <a href="../general/landing.html" button type="button" class="btn btn-outline-danger log-out">Log Out</button></a>
+    </div>
+
+    <a href = '../admin/admin_course.html'><img src = "https://cdn-icons-png.flaticon.com/512/786/786399.png" class = 'back-icon'></a>
+
+    
+    <div class = 'container-fluid'>
+      <h4 style="margin-left: 25%; margin-bottom: 20px;"><b>Course Details</b></h4>
+      <form style="margin-left:25%; margin-right: 5%;">
+        
+        <div class="form-group" style="margin-bottom: 20px;">
+          <label for="course-name">Course Name</label>
+          <input type="text" class="form-control" id="course-name" placeholder="Enter the new course name">
+        </div>
+
+        <div class="row">
+          <div class="form-group col-md-6" style="margin-bottom: 20px;">
+            <label for="class-number">Number of Classes</label>
+            <input type="number" class="form-control" id="class-number" placeholder="How many classes will this course have?">
+          </div>
+
+          <div class="form-group col-md-6" style="margin-bottom: 20px;">
+            <label for="course-code">Course Code</label>
+            <input type="text" class="form-control" id="course-code" placeholder="Enter the new Course Code">
+          </div>
+          
+        </div>
+
+        <div class = 'row'>
+          <div class = " form-group col-md-6" style="margin-bottom: 20px;">
+            <label for="prerequisites">Prerequisites</label><br>
+            <div id="prerequisites" class="dropdown-check-list">
+            <span class="anchor" style="border-radius: 5px;">Select the prerequisites</span>
+            <ul class="items">
+              <li><input type="checkbox" style="margin-right: 10px; margin-left: 10px;">IS111 </li>
+              <!--auto populate based on courseNames-->
+              <li><input type="checkbox" style="margin-right: 10px; margin-left: 10px;">IS222 </li>
+              <li><input type="checkbox" style="margin-right: 10px; margin-left: 10px;">IS333 </li>
+            </ul>
+            </div>
+          </div>
+        </div>
+
+        <h5 style="margin-bottom: 10px;"><b>Class 1 Details</b></h5>
+
+        <div class="row">
+          <div class="form-group col-md-6" style="margin-bottom: 20px;">
+            <label for="start-date">Start Date</label>
+            <input type="datetime-local" class="form-control" id="start-date">
+          </div>
+          <div class="form-group col-md-6">
+            <label for="end-date">End Date</label>
+            <input type="datetime-local" class="form-control" id="end-date">
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="form-group col-md-6">
+            <label for="max-occupancy">Max Class Occupancy</label>
+            <input type="number" class="form-control" id="max-occupancy" placeholder="Enter the max course occupancy (in number)">
+          </div>
+
+          <div class="form-group col-md-6" style="margin-bottom: 20px;">
+            <label for="trainer">Trainer</label>
+            <select id="trainer" class="form-control">
+              <option selected>Choose the trainer for this class</option>
+              <option>Poskitt</option>
+              <option>Joseph</option>
+            </select>
+          </div>
+        </div>
+
+        <div class = "row justify-content-center">
+          <button type="submit" class="btn btn-success" style="width: 80px; border-radius: 20px;">Create</button>
+        </div>
+        
+      </form>
+    </div>
+
+    <script>
+      var checkList = document.getElementById('prerequisites');
+      checkList.getElementsByClassName('anchor')[0].onclick = function(evt) {
+        if (checkList.classList.contains('visible'))
+          checkList.classList.remove('visible');
+        else
+          checkList.classList.add('visible');
+      }
+    </script>
+  </body>
+</html>
