@@ -1,0 +1,110 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-uWxY/CJNBR+1zjPWmfnSnVxwRheevXITnMqoEIeG1LJrdI0GlVs/9cVSyPYXdcSF" crossorigin="anonymous">
+
+    <!--Link to external CSS-->
+    <link rel="stylesheet" href="../stylesheets/style.css">
+
+    <title>Course (Learner)</title>
+
+
+  </head>
+  <body>
+
+    <!-- Option 1: Bootstrap Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-kQtW33rZJAHjgefvhyyzcGF3C5TFyBQBA13V1RKPf4uH+bwyzQxZ6CmMZHmNBEfJ" crossorigin="anonymous"></script>
+    
+    <div class="sidenav">
+      <img src='../img-sources/company-logo.png' style="width: 180px; height:60px; margin-right: 15px; padding-left: 0px;">
+      <a href="../learner/learner_home.html" style="margin-top: 20px;"><img src = 'https://cdn-icons-png.flaticon.com/512/609/609803.png' class='navbar-icons' id = 'logo'>Home</a>
+      <a href="../learner/learner_course.html"><img src = 'https://cdn-icons-png.flaticon.com/512/2232/2232688.png' class = 'navbar-icons'>Courses</a>
+      <a href="#"><img src = 'https://cdn-icons-png.flaticon.com/512/1041/1041916.png' class = 'navbar-icons'>Messages</a>
+      <a href="#"><img src = 'https://cdn-icons-png.flaticon.com/512/2025/2025202.png' class = 'navbar-icons'>Forums</a>
+      <a href="#"><img src = 'https://cdn-icons-png.flaticon.com/512/3132/3132084.png' class = 'navbar-icons'>Settings</a>
+      <a href="../general/landing.html" button type="button" class="btn btn-outline-danger log-out">Log Out</button></a>
+    </div>
+
+    <div class = "container-fluid">
+
+        <!-- searchbar  -->
+        <div class = "row" style="margin-left: 20%;">
+            <form>
+                <div class = "form-group" style="margin-top: 3%; ">
+                    <input type="email" class="form-control" id="searchbar" placeholder="Search courses" style="border: solid 1px grey; width: 95%; padding: 8px; border-radius: 20px; padding-left: 45px;">
+                    <img src = "https://cdn-icons-png.flaticon.com/512/482/482631.png" class = 'search-icon'>
+                    </div>
+                </div>
+            </form>
+        </div>
+
+        <ul class="nav nav-tabs" style="margin-left: 21%; margin-top: 30px;">
+            <li class="nav-item">
+              <a class="nav-link active" aria-current="page" href="../learner/learner_course.html">Available</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="../learner/learner_enrolled_course.html">Enrolled</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="../learner/learner_registered_course.html">Registered</a>
+              </li>
+        </ul>
+        
+        <div style="margin-left: 21%; margin-top: 1%;">
+
+            <!-- For each new instance, just replace this code block with {{Course Nmae}} and {{name}} -->
+            <div class = "courses">
+                <div class = "container">
+                    <div class = "row">
+                        <div class = "col-md-2">
+                            <img src = "https://sg.canon/media/image/2020/08/26/e0974bdc54d445039d4e3db2301b0c73_E34xx_AS_FR_cl2_blk_en-362x320.png" style="width: 100px; height: 100px; position: inherit; margin: 20px;"> 
+                        </div>
+        
+                        <div class = 'col-md-8'>
+                            <b>HP111: Introduction to HP InkJet Series (Class 4)</b><br><br>
+                            Start Date: 16 Sep 2021<br>
+                            End Date: 16 Nov 2021<br>
+                            Trainer: Glenda <br>
+                            Course Occupancy: 11/60
+                        </div>
+                        
+                        <div class = 'col-md-1'>
+                            <a href = '#' button type="button" class="btn btn-outline-success" style="float: right; border-radius: 20px; margin-left: 20px; margin-top: 100%;">Register</button></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- delete this later  -->
+            <div class = "courses">
+                <div class = "container">
+                    <div class = "row">
+                        <div class = "col-md-2">
+                            <img src = "https://sg.canon/media/image/2020/08/26/e0974bdc54d445039d4e3db2301b0c73_E34xx_AS_FR_cl2_blk_en-362x320.png" style="width: 100px; height: 100px; position: inherit; margin: 20px;"> 
+                        </div>
+        
+                        <div class = 'col-md-8'>
+                            <b>Canon111: Introduction to Canon Pixma Series (Class 6)</b><br><br>
+                            Start Date: 16 Dec 2021<br>
+                            End Date: 16 Jan 2022<br>
+                            Trainer: Li Yin <br>
+                            Course Occupancy: 1/60
+                        </div>
+
+                        <div class = 'col-md-1'>
+                            <a href = '#' button type="button" class="btn btn-outline-success" style="float: right; border-radius: 20px; margin-left: 20px; margin-top: 100%;">Details</button></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+  </body>
+</html>

@@ -11,24 +11,9 @@
     <!--Link to external CSS-->
     <link rel="stylesheet" href="../stylesheets/style.css">
 
-    <title>Courses (Admin)</title>
+    <title>Enrolled Course (Learner)</title>
 
-    <style>
-        #edit-btn{
-            float: right; 
-            border-radius: 20px; 
-            margin-left: 20px; 
-            margin-top: 100%; 
-            width: 80px;
-        }
 
-        #listing-pic{
-            width: 100px; 
-            height: 100px; 
-            position: inherit; 
-            margin: 20px;
-        }
-    </style>
   </head>
   <body>
 
@@ -37,8 +22,8 @@
     
     <div class="sidenav">
       <img src='../img-sources/company-logo.png' style="width: 180px; height:60px; margin-right: 15px; padding-left: 0px;">
-      <a href="../trainer/trainer_home.html" style="margin-top: 20px;"><img src = 'https://cdn-icons-png.flaticon.com/512/609/609803.png' class='navbar-icons' id = 'logo'>Home</a>
-      <a href="../trainer/trainer_course.html"><img src = 'https://cdn-icons-png.flaticon.com/512/2232/2232688.png' class = 'navbar-icons'>Courses</a>
+      <a href="../learner/learner_home.html" style="margin-top: 20px;"><img src = 'https://cdn-icons-png.flaticon.com/512/609/609803.png' class='navbar-icons' id = 'logo'>Home</a>
+      <a href="../learner/learner_course.html"><img src = 'https://cdn-icons-png.flaticon.com/512/2232/2232688.png' class = 'navbar-icons'>Courses</a>
       <a href="#"><img src = 'https://cdn-icons-png.flaticon.com/512/1041/1041916.png' class = 'navbar-icons'>Messages</a>
       <a href="#"><img src = 'https://cdn-icons-png.flaticon.com/512/2025/2025202.png' class = 'navbar-icons'>Forums</a>
       <a href="#"><img src = 'https://cdn-icons-png.flaticon.com/512/3132/3132084.png' class = 'navbar-icons'>Settings</a>
@@ -60,10 +45,13 @@
 
         <ul class="nav nav-tabs" style="margin-left: 21%; margin-top: 30px;">
             <li class="nav-item">
-              <a class="nav-link" href="../trainer/trainer_course.html">Ongoing</a>
+              <a class="nav-link" href="../learner/learner_course.html">Available</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link active" aria-current="page" href="../trainer/trainer_editing_course.html">Editing</a>
+              <a class="nav-link active" aria-current="page" href="../learner/learner_enrolled_course.html">Enrolled</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="../learner/learner_registered_course.html">Registered</a>
               </li>
         </ul>
         
@@ -74,7 +62,7 @@
                 <div class = "container">
                     <div class = "row">
                         <div class = "col-md-2">
-                            <img src = "https://sg.canon/media/image/2020/08/26/e0974bdc54d445039d4e3db2301b0c73_E34xx_AS_FR_cl2_blk_en-362x320.png" id = 'listing-pic'> 
+                            <img src = "https://sg.canon/media/image/2020/08/26/e0974bdc54d445039d4e3db2301b0c73_E34xx_AS_FR_cl2_blk_en-362x320.png" style="width: 100px; height: 100px; position: inherit; margin: 20px;"> 
                         </div>
         
                         <div class = 'col-md-8'>
@@ -86,7 +74,30 @@
                         </div>
                         
                         <div class = 'col-md-1'>
-                            <a href = '../trainer/trainer_edit_content.html' button type="button" class="btn btn-outline-success" id = 'edit-btn'>Edit</button></a>
+                            <a href = '../learner/learner_class_content.html' button type="button" class="btn btn-success" style="float: right; border-radius: 20px; margin-left: 20px; margin-top: 100%;">Launch</button></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- delete this later  -->
+            <div class = "courses">
+                <div class = "container">
+                    <div class = "row">
+                        <div class = "col-md-2">
+                            <img src = "https://sg.canon/media/image/2020/08/26/e0974bdc54d445039d4e3db2301b0c73_E34xx_AS_FR_cl2_blk_en-362x320.png" style="width: 100px; height: 100px; position: inherit; margin: 20px;"> 
+                        </div>
+        
+                        <div class = 'col-md-8'>
+                            <b>Canon111: Introduction to Canon Pixma Series (Class 6)</b><br><br>
+                            Start Date: 16 Dec 2021<br>
+                            End Date: 16 Jan 2022<br>
+                            Trainer: Li Yin <br>
+                            Course Occupancy: 1/60
+                        </div>
+
+                        <div class = 'col-md-1'>
+                            <a href = '../learner/learner_class_content.html' button type="button" class="btn btn-success" style="float: right; border-radius: 20px; margin-left: 20px; margin-top: 100%;">Launch</button></a>
                         </div>
                     </div>
                 </div>
@@ -95,6 +106,5 @@
         </div>
 
     </div>
-
   </body>
 </html>

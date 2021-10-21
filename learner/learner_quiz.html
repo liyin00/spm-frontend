@@ -11,8 +11,21 @@
     <!--Link to external CSS-->
     <link rel="stylesheet" href="../stylesheets/style.css">
 
-    <title>Template (Learner</title>
+    <title>Quiz (Learner)</title>
 
+    <style>
+        .question{
+            margin-bottom: 30px;
+        }
+
+        #submit{
+            position: absolute;
+            top:90%;
+            border-radius: 20px;
+            left: 58%;
+            width: 7%;
+        }
+    </style>
 
   </head>
   <body>
@@ -30,5 +43,35 @@
       <a href="../general/landing.html" button type="button" class="btn btn-outline-danger log-out">Log Out</button></a>
     </div>
 
+    <!-- back button  -->
+    <a href = '../learner/learner_section_content.html'><img src = "https://cdn-icons-png.flaticon.com/512/786/786399.png" class = 'back-icon'></a>
+
+    <div style="margin-left: 25%;">
+        <h4 style="margin-bottom: 30px;">
+          <b style="color: gray;">Quiz 1: Why InkJet?</b>
+        </h4>
+
+        <div class = 'question'>
+            <h5>1. InkJet is a new series invented by HP.</h5>
+            <input type="radio" id="html" name="fav_language" value="HTML">
+            Option 1 <br>
+            <input type="radio" id="css" name="fav_language" value="CSS">
+            Option 2<br>
+            <input type="radio" id="javascript" name="fav_language" value="JavaScript">
+            Option 3 <br>
+        </div>
+
+        <div class = 'question'>
+            <h5>2. Which of the following statements are true?</h5>
+            <input type="radio" id="html" name="fav_language" value="HTML">
+            Option 1 <br>
+            <input type="radio" id="css" name="fav_language" value="CSS">
+            Option 2<br>
+            <input type="radio" id="javascript" name="fav_language" value="JavaScript">
+            Option 3 <br>
+        </div>
+
+        <a href = '#' button type="button" class="btn btn-success" id = 'submit'>Submit</button></a>
+    </div>
   </body>
 </html>

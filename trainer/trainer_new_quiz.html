@@ -31,6 +31,9 @@
         .question{
             margin-bottom: 10px;
         }
+        #question-template{
+            display: none;
+        }
 
     </style>
 
@@ -39,6 +42,8 @@
 
     <!-- Option 1: Bootstrap Bundle with Popper -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-kQtW33rZJAHjgefvhyyzcGF3C5TFyBQBA13V1RKPf4uH+bwyzQxZ6CmMZHmNBEfJ" crossorigin="anonymous"></script>
+
+    <script src="https://code.jquery.com/jquery-3.5.0.js"></script>
     
     <div class="sidenav">
       <img src='../img-sources/company-logo.png' style="width: 180px; height:60px; margin-right: 15px; padding-left: 0px;">
@@ -80,14 +85,39 @@
             </div>
             </form>
 
-            <div class = 'questions'>
+            <div class = 'questions' id = 'question'>
+                <a href = '#' id = 'add-question'>Add a question</a>
                 <form>
                     <!-- question  -->
                     <div class="form-group question">
                         <input type="text" class="form-control" id="question" aria-describedby="emailHelp" placeholder="Enter question" style="width: 92%;">
                     </div>
-                    <a href="#" id = 'add-new' onclick = "newQuestion()">Add an option</a>
+                    <a href="#" id = 'add-new' >Add an option</a>
                     <!-- options  -->
+                    <div class="form-check">
+
+                        <div class = 'option-real'>
+                            <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios1" value="option2" checked >
+                            <input type="text" class="form-control" id="question" aria-describedby="emailHelp" placeholder="Enter option" style="width:92%">
+                        </div>
+
+                        <div class = 'option' id = 'option-template'>
+                            <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios1" value="option2" checked >
+                            <input type="text" class="form-control" id="question" aria-describedby="emailHelp" placeholder="Enter option" style="width:92%">
+                        </div>
+                    </div>  
+
+                </form>
+            </div>
+
+            <div class = 'questions' id = 'question-template'>
+                <form>
+
+                    <div class="form-group question">
+                        <input type="text" class="form-control" id="question" aria-describedby="emailHelp" placeholder="Enter question" style="width: 92%;">
+                    </div>
+                    <a href="#" id = 'add-new'>Add an option</a>
+
                     <div class="form-check">
 
                         <div class = 'option'>
@@ -111,16 +141,63 @@
 
     <script>
 
-        document.getElementById('add-new').onclick = repeat;
-        var i = 0;
-        var original = document.getElementById('option-template');
+        // document.getElementById('add-new').onclick = repeat;
+        // var i = 0;
+        // var original = document.getElementById('option-template');
 
-        function repeat() {
+        // function repeat() {
+        //     var clone = original.cloneNode(true);
+        //     clone.id = "option-template" + ++i; 
+        //     original.parentNode.appendChild(clone);
+        //     document.getElementById(clone.id).style.display = 'block';
+        // }
+
+        document.getElementById("add-question").onclick = repeat;
+        var i = 0;
+        var original = document.getElementById('question-template');
+        console.log(original);
+        function repeat(){
             var clone = original.cloneNode(true);
-            clone.id = "option-template" + ++i; 
+            clone.id = "question" + ++i; 
             original.parentNode.appendChild(clone);
             document.getElementById(clone.id).style.display = 'block';
+            console.log("hello hello");
+            var childCounter = 1;
+            $("#question").children().each(function () {
+                this.id = "option" + i + '.' + childCounter;
+                childCounter ++
+                console.log(this.id)
+            });
         }
+
+        // document.getElementById("add-new").onclick = childRepeat; 
+        // var template = document.getElementById("option-template");
+        // function childRepeat(){
+        //     var childClone = template.cloneNode(true);
+            
+        // }
+        // const myElement = document.getElementById('foo');
+        //     for (let i = 0; i < myElement.children.length; i++) {
+        //     console.log(myElement.children[i].tagName);
+        //     }
+        // $( "#question" ).children().css( "background-color", "red" );
+        // var child_id = clone.id + 
+        // $(clone.id).find('#child').attr('id', 'modifyChildId');
+        // function fixIds(elem, cntr) {
+        //     $(elem).find("[id]").add(elem).each(function() {
+        //         this.id = this.id + cntr;
+        //     })
+        // }
+
+        // var cloneCntr = 1;
+        // $("button").click(function () { 
+        //     var table = $("#table").clone(true,true) 
+        //     fixIds(table, cloneCntr);
+        //     table.insertAfter("#table") 
+        //     cloneCntr++;
+        // });
+
+        
     </script>
   </body>
 </html>
