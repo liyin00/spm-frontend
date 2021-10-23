@@ -11,6 +11,9 @@
     <!--Link to external CSS-->
     <link rel="stylesheet" href="../stylesheets/style.css">
 
+    <!-- Vue -->
+    <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
+
     <title>New Quiz (Trainer)</title>
     <style>
         label{
@@ -25,15 +28,15 @@
             margin-bottom: 10px;
             margin-top: 10px;
         }
-        #option-template{
+        /* #option-template{
             display: none;
-        }
+        } */
         .question{
             margin-bottom: 10px;
         }
-        #question-template{
+        /* #question-template{
             display: none;
-        }
+        } */
 
     </style>
 
@@ -42,8 +45,6 @@
 
     <!-- Option 1: Bootstrap Bundle with Popper -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-kQtW33rZJAHjgefvhyyzcGF3C5TFyBQBA13V1RKPf4uH+bwyzQxZ6CmMZHmNBEfJ" crossorigin="anonymous"></script>
-
-    <script src="https://code.jquery.com/jquery-3.5.0.js"></script>
     
     <div class="sidenav">
       <img src='../img-sources/company-logo.png' style="width: 180px; height:60px; margin-right: 15px; padding-left: 0px;">
@@ -58,146 +59,78 @@
     <!-- back button  -->
     <a href = '../trainer/trainer_edit_content.html'><img src = "https://cdn-icons-png.flaticon.com/512/786/786399.png" class = 'back-icon'></a>
 
-    <div style="margin-left: 25%;">
+    <div style="margin-left: 25%;" id = "quiz">
 
         <form>
             <div class="row">
                 <div class = 'form-group col-md-2'>
                     <h3><b>My Quiz</b></h3>
-                    
                 </div>
                 <div class="form-group col-md-3">
-                <label for="time-limit">Time Limit (in minutes)</label>
-                <input type="number" class="form-control" id="time-limit" placeholder="Enter time limit for quiz">
+                    <label for="time-limit">Time Limit (in minutes)</label>
+                    <input type="number" class="form-control" id="time-limit" placeholder="Enter time limit for quiz">
                 </div>
                 <div class="form-group col-md-3">
-                <label for="quiz-type">Quiz Type</label>
-                <select id="quiz-type" class="form-control">
-                    <option selected>Choose Quiz Type</option>
-                    <option>Graded</option>
-                    <option>Ungraded</option>
-                </select>
+                    <label for="quiz-type">Quiz Type</label>
+                    <select id="quiz-type" class="form-control">
+                        <option selected>Choose Quiz Type</option>
+                        <option>Graded</option>
+                        <option>Ungraded</option>
+                    </select>
                 </div>
                 <div class="form-group col-md-3">
-                <label for="passing-score">Passing Score</label>
-                <input type="number" class="form-control" id="passing-score" placeholder="Enter minimum passing score">
+                    <label for="passing-score">Passing Score</label>
+                    <input type="number" class="form-control" id="passing-score" placeholder="Enter minimum passing score">
+                    <br>
+                </div>
+            </div>
+            <div class = 'row'>
+                <input type = 'number' placeholder="How many questions should this quiz contain?" v-model.number = 'questionNum' style="border-radius: 10px; padding: 8px; width: 90%; border: 1px solid grey;">
+            </div>
+        </form>
+
+        <div v-for = 'question in questionNum'>
+            <br>
+            <form>
+                <!-- question  -->
+                <small><b>Question {{question}}</b></small>
+                <div class="form-group question">
+                    <input type="text" class="form-control" id="question" aria-describedby="emailHelp" placeholder="Enter question" style="width: 95%;">
+                </div>
+                <!-- <input type = 'number' v-model.number = 'optionNum' placeholder="Enter number of options"> -->
+                <a href="#" v-on:click = "addOption" >Add an option</a>
+                <!-- options  -->
+                <div class="form-check">
+                    <div class = 'option-real' v-for='option in optionNum'>
+                        <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios1" value="option2" checked >
+                        <input type="text" class="form-control" id="question" aria-describedby="emailHelp" placeholder="Enter option" style="width:92%">
+                    </div>
+
+                </div>  
                 <br>
-            </div>
+
             </form>
+        </div>
 
-            <div class = 'questions' id = 'question'>
-                <a href = '#' id = 'add-question'>Add a question</a>
-                <form>
-                    <!-- question  -->
-                    <div class="form-group question">
-                        <input type="text" class="form-control" id="question" aria-describedby="emailHelp" placeholder="Enter question" style="width: 92%;">
-                    </div>
-                    <a href="#" id = 'add-new' >Add an option</a>
-                    <!-- options  -->
-                    <div class="form-check">
+        <div>
+            <a href = '#' button type="button" class="btn btn-success" style="border-radius: 20px; width: 7%; margin-top: 20px; margin-left: 40%;">Save</button></a>
+        </div>
 
-                        <div class = 'option-real'>
-                            <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios1" value="option2" checked >
-                            <input type="text" class="form-control" id="question" aria-describedby="emailHelp" placeholder="Enter option" style="width:92%">
-                        </div>
-
-                        <div class = 'option' id = 'option-template'>
-                            <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios1" value="option2" checked >
-                            <input type="text" class="form-control" id="question" aria-describedby="emailHelp" placeholder="Enter option" style="width:92%">
-                        </div>
-                    </div>  
-
-                </form>
-            </div>
-
-            <div class = 'questions' id = 'question-template'>
-                <form>
-
-                    <div class="form-group question">
-                        <input type="text" class="form-control" id="question" aria-describedby="emailHelp" placeholder="Enter question" style="width: 92%;">
-                    </div>
-                    <a href="#" id = 'add-new'>Add an option</a>
-
-                    <div class="form-check">
-
-                        <div class = 'option'>
-                            <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios1" value="option2" checked >
-                            <input type="text" class="form-control" id="question" aria-describedby="emailHelp" placeholder="Enter option" style="width:92%">
-                        </div>
-
-                        <div class = 'option' id = 'option-template'>
-                            <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios1" value="option2" checked >
-                            <input type="text" class="form-control" id="question" aria-describedby="emailHelp" placeholder="Enter option" style="width:92%">
-                        </div>
-                    </div>  
-
-                </form>
-            </div>
-
-            <!-- reproductivity not done, come back to this later  -->
-
-            <a href = '#' button type="button" class="btn btn-success" style="position: absolute; float: right; border-radius: 20px; width: 7%; top: 93%; left: 58%;">Save</button></a>
     </div>
 
     <script>
-
-        // document.getElementById('add-new').onclick = repeat;
-        // var i = 0;
-        // var original = document.getElementById('option-template');
-
-        // function repeat() {
-        //     var clone = original.cloneNode(true);
-        //     clone.id = "option-template" + ++i; 
-        //     original.parentNode.appendChild(clone);
-        //     document.getElementById(clone.id).style.display = 'block';
-        // }
-
-        document.getElementById("add-question").onclick = repeat;
-        var i = 0;
-        var original = document.getElementById('question-template');
-        console.log(original);
-        function repeat(){
-            var clone = original.cloneNode(true);
-            clone.id = "question" + ++i; 
-            original.parentNode.appendChild(clone);
-            document.getElementById(clone.id).style.display = 'block';
-            console.log("hello hello");
-            var childCounter = 1;
-            $("#question").children().each(function () {
-                this.id = "option" + i + '.' + childCounter;
-                childCounter ++
-                console.log(this.id)
-            });
-        }
-
-        // document.getElementById("add-new").onclick = childRepeat; 
-        // var template = document.getElementById("option-template");
-        // function childRepeat(){
-        //     var childClone = template.cloneNode(true);
-            
-        // }
-        // const myElement = document.getElementById('foo');
-        //     for (let i = 0; i < myElement.children.length; i++) {
-        //     console.log(myElement.children[i].tagName);
-        //     }
-        // $( "#question" ).children().css( "background-color", "red" );
-        // var child_id = clone.id + 
-        // $(clone.id).find('#child').attr('id', 'modifyChildId');
-        // function fixIds(elem, cntr) {
-        //     $(elem).find("[id]").add(elem).each(function() {
-        //         this.id = this.id + cntr;
-        //     })
-        // }
-
-        // var cloneCntr = 1;
-        // $("button").click(function () { 
-        //     var table = $("#table").clone(true,true) 
-        //     fixIds(table, cloneCntr);
-        //     table.insertAfter("#table") 
-        //     cloneCntr++;
-        // });
-
-        
+        var app = new Vue({
+            el: "#quiz",
+            data : {
+                questionNum:0,
+                optionNum: 0
+            },
+            methods : {
+                addOption: function(){
+                    this.optionNum += 1
+                }
+            }
+        })
     </script>
   </body>
 </html>

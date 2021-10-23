@@ -17,6 +17,9 @@
     <!-- jQuery -->
     <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
 
+    <!-- Vue -->
+    <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
+
     <title>Add New Course (Admin)</title>
     
     <style>
@@ -91,74 +94,68 @@
     <a href = '../admin/admin_course.html'><img src = "https://cdn-icons-png.flaticon.com/512/786/786399.png" class = 'back-icon'></a>
 
     
-    <div class = 'container-fluid'>
+    <div class = 'container-fluid' id = 'course'>
       <h4 style="margin-left: 25%; margin-bottom: 20px;"><b>Course Details</b></h4>
       <form style="margin-left:25%; margin-right: 5%;">
         
         <div class="form-group" style="margin-bottom: 20px;">
           <label for="course-name">Course Name</label>
-          <input type="text" class="form-control" id="course-name" placeholder="Enter the new course name">
+          <input type="text" class="form-control" id="course-name" placeholder="Enter the new course name" v-model = 'courseName'>
+          <label for="course-description">Course description</label>
+          <input type="text" class="form-control" id="course-description" placeholder="Describe what this course is about" v-model = 'courseDescription'>
         </div>
 
         <div class="row">
           <div class="form-group col-md-6" style="margin-bottom: 20px;">
             <label for="class-number">Number of Classes</label>
-            <input type="number" class="form-control" id="class-number" placeholder="How many classes will this course have?">
+            <input type="number" class="form-control" placeholder="How many classes will this course have?" v-model.number = "classNum">
           </div>
-
-          <div class="form-group col-md-6" style="margin-bottom: 20px;">
-            <label for="course-code">Course Code</label>
-            <input type="text" class="form-control" id="course-code" placeholder="Enter the new Course Code">
-          </div>
-          
-        </div>
-
-        <div class = 'row'>
           <div class = " form-group col-md-6" style="margin-bottom: 20px;">
             <label for="prerequisites">Prerequisites</label><br>
             <div id="prerequisites" class="dropdown-check-list">
             <span class="anchor" style="border-radius: 5px;">Select the prerequisites</span>
             <ul class="items">
-              <li><input type="checkbox" style="margin-right: 10px; margin-left: 10px;">IS111 </li>
-              <!--auto populate based on courseNames-->
-              <li><input type="checkbox" style="margin-right: 10px; margin-left: 10px;">IS222 </li>
-              <li><input type="checkbox" style="margin-right: 10px; margin-left: 10px;">IS333 </li>
+              <li><input type="checkbox" style="margin-right: 10px; margin-left: 10px;">{{prerequisites}}</li>
             </ul>
             </div>
           </div>
+          
         </div>
 
-        <h5 style="margin-bottom: 10px;"><b>Class 1 Details</b></h5>
+        <!-- this is 1 entire class  -->
+        <div v-for = "classCounts in classNum">
+          <h5 style="margin-bottom: 10px;"><b>Class {{classCounts}} Details</b></h5>
 
-        <div class="row">
-          <div class="form-group col-md-6" style="margin-bottom: 20px;">
-            <label for="start-date">Start Date</label>
-            <input type="datetime-local" class="form-control" id="start-date">
+          <div class="row">
+            <div class="form-group col-md-6" style="margin-bottom: 20px;">
+              <label for="start-date">Start Date</label>
+              <input type="datetime-local" class="form-control" id="start-date" v-model="startDate">
+            </div>
+            <div class="form-group col-md-6">
+              <label for="end-date">End Date</label>
+              <input type="datetime-local" class="form-control" id="end-date" v-model = "endDate">
+            </div>
           </div>
-          <div class="form-group col-md-6">
-            <label for="end-date">End Date</label>
-            <input type="datetime-local" class="form-control" id="end-date">
+  
+          <div class="row">
+            <div class="form-group col-md-6">
+              <label for="max-occupancy">Max Class Occupancy</label>
+              <input type="number" class="form-control" id="max-occupancy" placeholder="Enter the max course occupancy (in number)" v-model = "classOccupancy">
+            </div>
+  
+            <div class="form-group col-md-6" style="margin-bottom: 20px;">
+              <label for="trainer">Trainer</label>
+              <select id="trainer" class="form-control">
+                <option selected>Choose the trainer for this class</option>
+                <option v-for='trainer in trainers'>{{trainer}}</option>
+              </select>
+            </div>
           </div>
         </div>
-
-        <div class="row">
-          <div class="form-group col-md-6">
-            <label for="max-occupancy">Max Class Occupancy</label>
-            <input type="number" class="form-control" id="max-occupancy" placeholder="Enter the max course occupancy (in number)">
-          </div>
-
-          <div class="form-group col-md-6" style="margin-bottom: 20px;">
-            <label for="trainer">Trainer</label>
-            <select id="trainer" class="form-control">
-              <option selected>Choose the trainer for this class</option>
-              <option>Poskitt</option>
-              <option>Joseph</option>
-            </select>
-          </div>
-        </div>
+        
 
         <div class = "row justify-content-center">
-          <button type="submit" class="btn btn-success" style="width: 80px; border-radius: 20px;">Create</button>
+          <button type="submit" class="btn btn-success" style="width: 80px; border-radius: 20px;" @click = 'createCourse();createClass()'>Create</button>
         </div>
         
       </form>
@@ -172,6 +169,63 @@
         else
           checkList.classList.add('visible');
       }
+
+      var app = new Vue({
+        el: '#course',
+        data:{
+          classNum : 0,
+          courseName : "",
+          courseDescription: "",
+          startDate : "",
+          endDate : "",
+          classOccupancy: "",
+          trainer: "", 
+          prerequisites: [],
+          courseId: 0,
+        },
+        methods:{ 
+
+          createCourse: function(){
+            var app = this 
+            // first invoke a post to create the course - what we need here is the courseDesc, courseName, isActive, prerequisites 
+            axios.post('http://192.168.1.28:5001/course/add',{
+              courseName: app.courseName,
+              courseDesc: app.courseDescription,
+              isActive: 1, 
+              prerequisites: "",
+            }).then(function(response){
+              console.log(response);
+            }).catch(function(error){
+              console.log(error);
+            });
+          },
+          getCourseId: function(){
+            // grab course id via course name as foreign keys for next step 
+            axios.get('http://192.168.1.28:5001/course/' + this.courseName)
+            .then(response => (this.courseId = response.data.courseId)
+            );
+          },
+
+          // courseId, startDateTime, endDateTime, learnerIds, trainerId, classSize 
+          createClass: function(){
+            var app = this 
+            // invoke post to course class 
+            axios.post('',{
+              // courseName: app.courseName,
+              // courseDesc: app.courseDescription,
+              // isActive: 1, 
+              // prerequisites: "",
+            }).then(function(response){
+              console.log(response);
+            }).catch(function(error){
+              console.log(error);
+            });
+          }
+
+        },
+      })
+
+
     </script>
   </body>
 </html>
