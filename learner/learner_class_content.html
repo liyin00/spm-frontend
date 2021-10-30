@@ -10,6 +10,9 @@
 
     <!--Link to external CSS-->
     <link rel="stylesheet" href="../stylesheets/style.css">
+    
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.6.12/dist/vue.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 
     <title>Class Content (Learner)</title>
 
@@ -20,6 +23,10 @@
             border-radius: 20px;
             left: 58%;
             width: 7%;
+        }
+
+        ul {
+            list-style-type: none;
         }
     </style>
 
@@ -42,7 +49,10 @@
     <a href = '../trainer/trainer_edit_course_main.html'><img src = "https://cdn-icons-png.flaticon.com/512/786/786399.png" class = 'back-icon'></a>
 
     <!-- title  -->
-    <div style="margin-left: 25%;">
+    <div id="contents" style="margin-left: 25%;">
+        
+      <!--
+        <div style="margin-left: 25%;">
         <h4 style="margin-bottom: 30px;">
             <b>HP 111: Introduction to InkJet Series</b>
         </h4>
@@ -53,7 +63,7 @@
             <a href ='#quizName'><li>Quiz 1: InkJet Basics</li></a>
         </ul>  
 
-        <!--Testing for reproductivity, delete afterwards-->
+        
         <h6>An intermediate guide to InkJet Series</h6>
         <ul style="list-style-type:none;">
             <a href = '../trainer/trainer_section_contents.html'><li>Lesson Materials</li></a>
@@ -61,9 +71,54 @@
         </ul>  
 
         <a href = '#'><h6>Final Quiz: Mastering InkJet</h6></a>
-
+      -->
         <a href = '../learner/learner_section_content.html' button type="button" class="btn btn-success" id = 'begin'>Begin</button></a>
     </div>
-
+      
+    <script>
+        courseClassId = 1 //to change using session storage
+        window.onload = retrieveLessonContents(courseClassId);
+        
+        function retrieveLessonContents(courseClassId){
+          const request = new XMLHttpRequest();
+          request.onreadystatechange = function() {
+              if(this.readyState == 4 && this.status == 200) {
+                  //console.log("entered");
+                  let lessonContents = JSON.parse(this.responseText);
+                  //console.log(lessonContents.data.lessons);
+                  const lessonName = lessonContents.data.lessons[0].lessonName;
+                  const lessonContent = lessonContents.data.lessons[0].lessonContent;
+                  const links = lessonContents.data.lessons[0].links;
+                 
+                  const contents = document.getElementById("contents");
+                  const div = document.createElement("div");
+                  const h4 = document.createElement("h4");
+                  
+                  h4.innerText = lessonName;
+                  contents.appendChild(h4);
+                  
+                  for (i=0; i<lessonContent.length;i++){
+                    const h6 = document.createElement("h6");
+                    const ul = document.createElement("ul");
+                    
+                    h6.innerText = lessonContent[i];
+                    ul.innerHTML = `<a href ='`+links[i]+`'>
+                                      <li>Lesson Materials</li>
+                                    </a>`
+                    
+                    contents.appendChild(h6);
+                    contents.appendChild(ul);
+                  }
+              }
+          };
+          request.open("GET", "http://192.168.50.157:5001/lessons/"+courseClassId, true);
+          request.send();
+        }
+    </script>
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js" integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous"></script>
+    
   </body>
 </html>
