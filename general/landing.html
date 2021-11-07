@@ -58,12 +58,27 @@
         </a>
       
         <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-          <li><a class="dropdown-item" href="../trainer/trainer_home.html">Trainer</a></li>
-          <li><a class="dropdown-item" href="../learner/learner_home.html">Learner</a></li>
-          <li><a class="dropdown-item" href="../admin/admin_home.html">Admin</a></li>
+          <li><a class="dropdown-item" href="../trainer/trainer_home.html" onclick="setUserIdTrainer()">Trainer</a></li>
+          <li><a class="dropdown-item" href="../learner/learner_home.html" onclick="setUserIdLearner()">Learner</a></li>
+          <li><a class="dropdown-item" href="../admin/admin_home.html" onclick="setUserIdAdmin()">Admin</a></li>
         </ul>
       </div>
 
     </div>
+
+    <script>
+      function setUserIdTrainer() {
+        localStorage.setItem("userId", 1);
+      }
+      
+      function setUserIdLearner() {
+        localStorage.setItem("userId", 2);
+      }
+
+      function setUserIdAdmin() {
+        localStorage.setItem("userId", 3);
+      }      
+    </script>
+
   </body>
 </html>
