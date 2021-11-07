@@ -40,7 +40,7 @@
       <a href="#"><img src = 'https://cdn-icons-png.flaticon.com/512/1041/1041916.png' class = 'navbar-icons'>Messages</a>
       <a href="#"><img src = 'https://cdn-icons-png.flaticon.com/512/2025/2025202.png' class = 'navbar-icons'>Forums</a>
       <a href="#"><img src = 'https://cdn-icons-png.flaticon.com/512/3132/3132084.png' class = 'navbar-icons'>Settings</a>
-      <a href="../general/landing.html" button type="button" class="btn btn-outline-danger log-out">Log Out</button></a>
+      <a href="../general/landing.html" button type="button" class="btn btn-outline-danger log-out" onclick="localStorage.clear()">Log Out</button></a>
     </div>
 
     <!-- back button  -->
@@ -73,5 +73,10 @@
 
         <a href = '#' button type="button" class="btn btn-success" id = 'submit'>Submit</button></a>
     </div>
+    <script>
+      //var userId = localStorage.getItem("userId");
+      //var courseClassId = localStorage.getItem("courseClassId");
+      //var lessonId = localStorage.getItem("lessonId");
+    </script>
   </body>
 </html>
