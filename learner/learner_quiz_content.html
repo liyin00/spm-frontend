@@ -56,10 +56,8 @@
         <h4 style="margin-bottom: 30px;">
             <b>HP 111: Introduction to InkJet Series</b>
         </h4>
-    
-        <h6>A beginner's guide to InkJet Series</h6>
+        
         <ul style="list-style-type:none;">
-            <a href ='../trainer/trainer_section_contents.html'><li>Lesson Materials</li></a>
             <a href ='#quizName'><li>Quiz 1: InkJet Basics</li></a>
         </ul>  
 
@@ -72,25 +70,44 @@
 
         <a href = '#'><h6>Final Quiz: Mastering InkJet</h6></a>
       -->
-        <a href = 'learner_quiz_content.html' button type="button" class="btn btn-success" id = 'begin'>Quizzes</button></a>
+        <a href = 'learner_quiz_content.html' button type="button" class="btn btn-success" id = 'begin'>Complete</button></a>
     </div>
       
     <script>
-        courseClassId = 1 //to change using session storage
-        var userId = localStorage.getItem("userId");
-        //var courseClassId = localStorage.getItem("courseClassId");
-        window.onload = retrieveLessonContents(courseClassId);
+        lessonId = 1 //to change using session storage
+        window.onload = retrieveQuizContents(lessonId);
         
-        function retrieveLessonContents(courseClassId){
+        function retrieveQuizContents(lessonId){
           const request = new XMLHttpRequest();
           request.onreadystatechange = function() {
               if(this.readyState == 4 && this.status == 200) {
                   //console.log("entered");
-                  let lessonContents = JSON.parse(this.responseText);
-                  //console.log(lessonContents);
+                  let quizContents = JSON.parse(this.responseText);
+                  console.log(quizContents);
                   
-                  //console.log(lessonContents.data.lessons);
-                  
+                  console.log(quizContents.data.quizzes);
+
+                  for (i=0; i< Object.keys(quizContents.data.quizzes).length;i ++){
+                    const isActive = quizContents.data.quizzes[i].isActive;
+                    const isGraded = quizContents.data.quizzes[i].isGraded;
+                    const quizLink = quizContents.data.quizzes[i].quizLink;
+                    const numOfQns = quizContents.data.quizzes[i].numOfQns;
+                    const quizId = quizContents.data.quizzes[i].quizId;
+      
+                    //console.log(classSize,courseClassId,startDateTime)
+                    const quizContent = document.getElementById("contents");
+                    
+                    if (isActive == "True"){
+                      const div = document.createElement("div");
+                      div.innerHTML = `  <ul style="list-style-type:none;">
+                                            <a href ='`+quizLink+`'><li>Quiz `+quizId+` [ `+numOfQns+` Questions ]</li></a>
+                                        </ul>  `
+                      quizContent.appendChild(div);
+                    }
+
+               
+                  }
+                  /*
                   const lessonName = lessonContents.data.lessons[0].lessonName;
                   const lessonContent = lessonContents.data.lessons[0].lessonContent;
                   const links = lessonContents.data.lessons[0].links;
@@ -114,52 +131,13 @@
                     contents.appendChild(h6);
                     contents.appendChild(ul);
                     
-                  }
+                  }*/
               }
           };
-          request.open("GET", "http://10.124.135.51:5000/lessons/"+courseClassId, true);
+          request.open("GET", "http://10.124.135.51:5000/quiz/lessonId/"+lessonId, true);
           request.send();
         }
 
-        function retrieveLessonQuizzes(courseClassId){
-          const request = new XMLHttpRequest();
-          request.onreadystatechange = function() {
-              if(this.readyState == 4 && this.status == 200) {
-                  //console.log("entered");
-                  let lessonContents = JSON.parse(this.responseText);
-                  //console.log(lessonContents);
-                  
-                  //console.log(lessonContents.data.lessons);
-                  
-                  const lessonName = lessonContents.data.lessons[0].lessonName;
-                  const lessonContent = lessonContents.data.lessons[0].lessonContent;
-                  const links = lessonContents.data.lessons[0].links;
-                 
-                  const contents = document.getElementById("contents");
-                  const div = document.createElement("div");
-                  const h4 = document.createElement("h4");
-                  
-                  h4.innerText = lessonName;
-                  contents.appendChild(h4);
-                  
-                  for (i=0; i<lessonContent.length;i++){
-                    const h6 = document.createElement("h6");
-                    const ul = document.createElement("ul");
-                    
-                    h6.innerText = lessonContent[i];
-                    ul.innerHTML = `<a href ='`+links[i]+`'>
-                                      <li>Lesson Materials</li>
-                                    </a>`
-                    
-                    contents.appendChild(h6);
-                    contents.appendChild(ul);
-                    
-                  }
-              }
-          };
-          request.open("GET", "http://192.168.50.157:5000/lessons/"+courseClassId, true);
-          request.send();
-        }
     </script>
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
