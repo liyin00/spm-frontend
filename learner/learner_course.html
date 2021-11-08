@@ -118,8 +118,10 @@
                   //console.log("entered");
                   let classes = JSON.parse(this.responseText);
                   //console.log(classes);
-                  
                   console.log(classes.data.classes);
+                  console.log(classes.data.info);
+
+                  //console.log(classes.data.classes);
                   
                   for (i=0; i< Object.keys(classes.data.classes).length;i ++){
                     const classSize = classes.data.classes[i].classSize;
@@ -128,7 +130,10 @@
                     const endDateTime = classes.data.classes[i].endDateTime;
                     const learnerIds = classes.data.classes[i].learnerIds;
                     const trainerId = classes.data.classes[i].trainerId;
+                    const courseName = classes.data.info[i][0];
+                    const trainerName = classes.data.info[i][1];
                     
+
                     //console.log(classSize,courseClassId,startDateTime)
                     const courseClasses = document.getElementById("classes");
                     
@@ -141,15 +146,15 @@
                                                 </div>
                                 
                                                 <div class = 'col-md-8'>
-                                                    <b>`+courseClassId+`: HP111: Introduction to HP InkJet Series (Class 4)</b><br><br>
+                                                    <b>`+courseClassId+`: `+courseName+`</b><br><br>
                                                     Start Date: `+startDateTime+`<br>
                                                     End Date: `+endDateTime+`<br>
-                                                    Trainer: `+trainerId+` - Glenda <br>
-                                                    Course Occupancy: `+classSize+`
+                                                    Trainer: `+trainerName+` <br>
+                                                    Class Size: `+classSize+`
                                                 </div>
                                                 
                                                 <div class = 'col-md-1'>
-                                                    <a href = '#' button type="button" class="btn btn-outline-success" style="float: right; border-radius: 20px; margin-left: 20px; margin-top: 100%;">Register</button></a>
+                                                    <a href = '#' onclick=setCourseClassId(`+courseClassId+`) button type="button" class="btn btn-outline-success" style="float: right; border-radius: 20px; margin-left: 20px; margin-top: 100%;">Register</button></a>
                                                 </div>
                                             </div>
                                         </div>
@@ -159,8 +164,13 @@
                   }
               }
           };
-          request.open("GET", "http://10.124.135.51:5000/class/"+courseClass, true);
+          request.open("GET", "http://10.124.135.51:5000/class/course/"+courseClass, true);
           request.send();
+        }
+
+        function setCourseClassId(id) {
+            console.log(id);
+            localStorage.setItem("courseClassId", id);
         }
 
     </script>
