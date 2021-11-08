@@ -79,13 +79,13 @@
         <a href="#"><img src = 'https://cdn-icons-png.flaticon.com/512/1041/1041916.png' class = 'navbar-icons'>Messages</a>
         <a href="#"><img src = 'https://cdn-icons-png.flaticon.com/512/2025/2025202.png' class = 'navbar-icons'>Forums</a>
         <a href="#"><img src = 'https://cdn-icons-png.flaticon.com/512/3132/3132084.png' class = 'navbar-icons'>Settings</a>
-        <a href="../general/landing.html" button type="button" class="btn btn-outline-danger log-out">Log Out</button></a>
+        <a href="../general/landing.html" button type="button" class="btn btn-outline-danger log-out" onclick="localStorage.clear()">Log Out</button></a>
       </div>
 
     <a href = '../trainer/trainer_course.html'><img src = "https://cdn-icons-png.flaticon.com/512/786/786399.png" class = 'back-icon'></a>
 
     <div class = 'course-description' id='classes'>
-        <h3><b>HP 111: Introduction to HP InkJet Series (Class 4)</b>
+        <h3><b id='course-name'></b>
         </h3>
         
         <!-- <div class = 'container-fluid course-details'>
@@ -106,9 +106,7 @@
             </div>
             <br>
         </div> -->
-        <h5 style="margin-bottom: 20px;">
-            <b>Class List</b>
-        </h5>
+
 
         <div class = 'enrolled'>
             <img src = "https://cdn-icons-png.flaticon.com/512/1077/1077012.png" class = 'enrolled-user-icon'> 
@@ -127,20 +125,21 @@
         var classId = localStorage.getItem("classId");
         var userId = localStorage.getItem("userId");
         var courseId = localStorage.getItem("courseId");
+        var courseName = localStorage.getItem("courseName");
         // console.log(classId);
-        window.onload = retrieveClassInfo(classId); getTrainerName(userId); getCourseName(courseId);
+        window.onload = retrieveClassInfo(classId); getTrainerName(userId); setCourseName(courseName)
 
         function getTrainerName(userId){
             const request = new XMLHttpRequest();
             request.onreadystatechange = function(){
                 if (this.readyState == 4 && this.status ==200){
                     let info = JSON.parse(this.responseText);
-                    console.log(info);
+                    // console.log(info);
                     const trainerName = info.data.name;
                     var name = localStorage.setItem("name", trainerName)
                 }
             }
-            request.open("GET", "http://192.168.1.11:5000/user/id/"+ userId, true);
+            request.open("GET", "http://10.124.0.161:5000/user/id/"+ userId, true);
             request.send();
         }
         function retrieveClassInfo(classId){
@@ -149,7 +148,7 @@
               if(this.readyState == 4 && this.status == 200) {
                   let classes = JSON.parse(this.responseText);
                   
-                  console.log(classes.data);
+                //   console.log(classes.data);
                   
                   for (i=0; i< Object.keys(classes.data).length;i ++){
                     const classSize = classes.data[i].classSize;
@@ -182,13 +181,17 @@
                                 </div>
                             </div>
                             <br>
+                            <h5 style="margin-bottom: 20px;">
+                                <b>Class List</b>
+                            </h5>
                         </div>`
                     courseClasses.appendChild(div);
+                    getCourseName(courseId);
                                     
                   }
               }
           };
-          request.open("GET", "http://192.168.1.11:5000/class/"+ classId, true);
+          request.open("GET", "http://10.124.0.161:5000/class/"+ classId, true);
           request.send();
         }
 
@@ -198,14 +201,18 @@
                 if (this.readyState == 4 && this.status ==200){
                     let info = JSON.parse(this.responseText);
                     console.log(info);
-                    // const courseName = info.data.name;
-                    // var name = localStorage.setItem("course_name", courseName)
+                    const courseName = info.data.courseName;
+                    localStorage.setItem("courseName",courseName);
                 }
             }
-            request.open("GET", "http://192.168.1.11:5000/course/id/"+ courseId, true);
+            request.open("GET", "http://10.124.0.161:5000/course/id/"+ courseId, true);
             request.send();
         }
         
+        function setCourseName(courseName){
+            coursename = document.getElementById("course-name");
+            coursename.innerHTML = courseName;
+        }
     </script>
   </body>
 </html>
