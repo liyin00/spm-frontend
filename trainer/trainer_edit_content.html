@@ -114,6 +114,10 @@
         #release-section{
             display: none;
         }
+
+        #release-quiz{
+            display: none;
+        }
     </style>
 
   </head>
@@ -228,6 +232,13 @@
                 <a href = '#' style="margin-left: 15px; font-size: 13px;">An intermediate guide to InkJet Series</a>
             </div>
 
+            <a href="#" onclick = 'releaseQuiz()'>Release Quiz</a>
+            <div id = 'release-quiz'>
+                <text style="margin-left: 35px; font-size: 13px;">Choose quiz to release:</text>
+                <a href = '#' style="margin-left: 15px; font-size: 13px;">A beginner's guide to InkJet Series</a>
+                <a href = '#' style="margin-left: 15px; font-size: 13px;">An intermediate guide to InkJet Series</a>
+            </div>
+
         </div>
 
 
@@ -285,8 +296,37 @@
             document.getElementById("release-section").style.display = 'block';
         }
 
+        function releaseQuiz(){
+            document.getElementById("release-quiz").style.display = 'block';
+            const json = {
+                "quizId": 1,
+                "lessonId": 1,
+                "isGraded": 1,
+                "passingMark": 7,
+                "numOfQns": 14,
+                "quizLink": "test",
+                "isActive": 'True'
+            };
+
+            const options = {
+                method: 'POST',
+                body: JSON.stringify(json ),
+                headers: {
+                    'Content-Type': 'application/json'
+                }
+            }
+
+            // send post request
+            fetch('http://10.124.135.51:5000/quiz/update', options)
+                .then(res => res.json())
+                .then(res => console.log(res))
+                .catch(err => console.error(err));
+        }
+
         function createQuiz(){
             window.location.replace("../trainer/trainer_new_quiz.html")
+            
+            
         }
     </script>
   </body>
