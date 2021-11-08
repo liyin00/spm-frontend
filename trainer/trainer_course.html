@@ -104,12 +104,28 @@
     </div>
     <script>
         var userId = localStorage.getItem("userId");
-        window.onload = retrieveClasses(userId);
-
+        window.onload = getTrainerName(userId);
 
         function setClass(courseClassId){
             localStorage.setItem("classId", courseClassId)
         }
+
+        function getTrainerName(userId){
+            const request = new XMLHttpRequest();
+            request.onreadystatechange = function(){
+                if (this.readyState == 4 && this.status ==200){
+                    let info = JSON.parse(this.responseText);
+                    console.log(info);
+                    const trainerName = info.data.name;
+                    var name = localStorage.setItem("name", trainerName)
+                }
+            }
+            retrieveClasses(userId);
+            request.open("GET", "http://10.124.0.161:5000/user/id/"+ userId, true);
+            request.send();
+            
+        }
+
         function retrieveClasses(userId){
           const request = new XMLHttpRequest();
           request.onreadystatechange = function() {
@@ -125,10 +141,12 @@
                     const endDateTime = classes.data.classes[i].endDateTime;
                     const learnerIds = classes.data.classes[i].learnerIds;
                     const trainerId = classes.data.classes[i].trainerId;
-                    
+                    const courseId = classes.data.classes[i].courseId;
+                    // localStorage.setItem("courseId", courseId);
+                    const trainerName = localStorage.getItem("name"); 
                     //console.log(classSize,courseClassId,startDateTime)
                     const courseClasses = document.getElementById("classes");
-                    
+                    const courseName = localStorage.getItem("courseName");
                     const div = document.createElement("div");
                     div.innerHTML = `<div class = "courses" id='app'>
                                         <div class = "container">
@@ -138,10 +156,10 @@
                                                 </div>
                                 
                                                 <div class = 'col-md-8'>
-                                                    <b>`+courseClassId+`: HP111: Introduction to HP InkJet Series (Class 4)</b><br><br>
+                                                    <b>`+courseName+`: (Class `+courseClassId+`)</b><br><br>
                                                     Start Date: `+startDateTime+`<br>
                                                     End Date: `+endDateTime+`<br>
-                                                    Trainer: `+trainerId+` - Glenda <br>
+                                                    Trainer: `+trainerName+`<br>
                                                     Course Occupancy: `+classSize+`
                                                 </div>
                                                 
@@ -152,12 +170,26 @@
                                         </div>
                                     </div>`
                     courseClasses.appendChild(div);
-                                    
+                    getCourseName(courseId);       
                   }
               }
           };
-          request.open("GET", "http://192.168.1.11:5000/class/trainer/"+ userId, true);
+          request.open("GET", "http://10.124.0.161:5000/class/trainer/"+ userId, true);
           request.send();
+        }
+
+        function getCourseName(courseId){
+            const request = new XMLHttpRequest();
+            request.onreadystatechange = function(){
+                if (this.readyState == 4 && this.status ==200){
+                    let info = JSON.parse(this.responseText);
+                    // console.log(info);
+                    const courseName = info.data.courseName;
+                    localStorage.setItem("courseName",courseName);
+                }
+            }
+            request.open("GET", "http://10.124.0.161:5000/course/id/"+ courseId, true);
+            request.send();
         }
     </script>
   </body>

@@ -67,10 +67,10 @@
               </li>
         </ul>
         
-        <div style="margin-left: 21%; margin-top: 1%;">
+        <div style="margin-left: 21%; margin-top: 1%;" id='classes'>
 
             <!-- For each new instance, just replace this code block with {{Course Nmae}} and {{name}} -->
-            <div class = "courses">
+            <!-- <div class = "courses">
                 <div class = "container">
                     <div class = "row">
                         <div class = "col-md-2">
@@ -90,11 +90,101 @@
                         </div>
                     </div>
                 </div>
-            </div>
+            </div> -->
 
         </div>
 
     </div>
 
+    <script>
+        var userId = localStorage.getItem("userId");
+        window.onload = getTrainerName(userId);
+
+        function setClass(courseClassId){
+            localStorage.setItem("classId", courseClassId)
+        }
+
+        function getTrainerName(userId){
+            const request = new XMLHttpRequest();
+            request.onreadystatechange = function(){
+                if (this.readyState == 4 && this.status ==200){
+                    let info = JSON.parse(this.responseText);
+                    console.log(info);
+                    const trainerName = info.data.name;
+                    var name = localStorage.setItem("name", trainerName)
+                }
+            }
+            retrieveClasses(userId);
+            request.open("GET", "http://10.124.0.161:5000/user/id/"+ userId, true);
+            request.send();
+            
+        }
+
+        function retrieveClasses(userId){
+          const request = new XMLHttpRequest();
+          request.onreadystatechange = function() {
+              if(this.readyState == 4 && this.status == 200) {
+                  let classes = JSON.parse(this.responseText);
+                  
+                  console.log(classes.data.classes);
+                  
+                  for (i=0; i< Object.keys(classes.data.classes).length;i ++){
+                    const classSize = classes.data.classes[i].classSize;
+                    const courseClassId = classes.data.classes[i].courseClassId;
+                    const startDateTime = classes.data.classes[i].startDateTime;
+                    const endDateTime = classes.data.classes[i].endDateTime;
+                    const learnerIds = classes.data.classes[i].learnerIds;
+                    const trainerId = classes.data.classes[i].trainerId;
+                    const courseId = classes.data.classes[i].courseId;
+                    // localStorage.setItem("courseId", courseId);
+                    const trainerName = localStorage.getItem("name"); 
+                    //console.log(classSize,courseClassId,startDateTime)
+                    const courseClasses = document.getElementById("classes");
+                    const courseName = localStorage.getItem("courseName");
+                    const div = document.createElement("div");
+                    div.innerHTML = `<div class = "courses" id='app'>
+                                        <div class = "container">
+                                            <div class = "row">
+                                                <div class = "col-md-2">
+                                                    <img src = "https://sg.canon/media/image/2020/08/26/e0974bdc54d445039d4e3db2301b0c73_E34xx_AS_FR_cl2_blk_en-362x320.png" style="width: 100px; height: 100px; position: inherit; margin: 20px;"> 
+                                                </div>
+                                
+                                                <div class = 'col-md-8'>
+                                                    <b>`+courseName+`: (Class `+courseClassId+`)</b><br><br>
+                                                    Start Date: `+startDateTime+`<br>
+                                                    End Date: `+endDateTime+`<br>
+                                                    Trainer: `+trainerName+`<br>
+                                                    Course Occupancy: `+classSize+`
+                                                </div>
+                                                
+                                                <div class = 'col-md-1'>
+                                                    <a href = '../trainer/trainer_edit_content.html' onclick=setClass(`+courseClassId+`) button type="button" class="btn btn-outline-success" id = 'edit-btn'>Edit</button></a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>`
+                    courseClasses.appendChild(div);
+                    getCourseName(courseId);       
+                  }
+              }
+          };
+          request.open("GET", "http://10.124.0.161:5000/class/trainer/"+ userId, true);
+          request.send();
+        }
+
+        function getCourseName(courseId){
+            const request = new XMLHttpRequest();
+            request.onreadystatechange = function(){
+                if (this.readyState == 4 && this.status ==200){
+                    let info = JSON.parse(this.responseText);
+                    // console.log(info);
+                    const courseName = info.data.courseName;
+                    localStorage.setItem("courseName",courseName);
+                }
+            }
+            request.open("GET", "http://10.124.0.161:5000/course/id/"+ courseId, true);
+            request.send();
+        }
+    </script>
   </body>
 </html>
