@@ -84,11 +84,11 @@
 
     <a href = '../trainer/trainer_course.html'><img src = "https://cdn-icons-png.flaticon.com/512/786/786399.png" class = 'back-icon'></a>
 
-    <div class = 'course-description'>
+    <div class = 'course-description' id='classes'>
         <h3><b>HP 111: Introduction to HP InkJet Series (Class 4)</b>
         </h3>
         
-        <div class = 'container-fluid course-details'>
+        <!-- <div class = 'container-fluid course-details'>
             <div class = 'row'>
                 <div class = 'col-md-4'>
                     Start Date: 16 Sep 2021 <br>
@@ -105,10 +105,7 @@
                 </div>
             </div>
             <br>
-            
-
-
-        </div>
+        </div> -->
         <h5 style="margin-bottom: 20px;">
             <b>Class List</b>
         </h5>
@@ -125,5 +122,90 @@
         </div>
         
     </div>
+
+    <script>
+        var classId = localStorage.getItem("classId");
+        var userId = localStorage.getItem("userId");
+        var courseId = localStorage.getItem("courseId");
+        // console.log(classId);
+        window.onload = retrieveClassInfo(classId); getTrainerName(userId); getCourseName(courseId);
+
+        function getTrainerName(userId){
+            const request = new XMLHttpRequest();
+            request.onreadystatechange = function(){
+                if (this.readyState == 4 && this.status ==200){
+                    let info = JSON.parse(this.responseText);
+                    console.log(info);
+                    const trainerName = info.data.name;
+                    var name = localStorage.setItem("name", trainerName)
+                }
+            }
+            request.open("GET", "http://192.168.1.11:5000/user/id/"+ userId, true);
+            request.send();
+        }
+        function retrieveClassInfo(classId){
+          const request = new XMLHttpRequest();
+          request.onreadystatechange = function() {
+              if(this.readyState == 4 && this.status == 200) {
+                  let classes = JSON.parse(this.responseText);
+                  
+                  console.log(classes.data);
+                  
+                  for (i=0; i< Object.keys(classes.data).length;i ++){
+                    const classSize = classes.data[i].classSize;
+                    const courseClassId = classes.data[i].courseClassId;
+                    const courseId = classes.data[i].courseId;
+                    const startDateTime = classes.data[i].startDateTime;
+                    const endDateTime = classes.data[i].endDateTime;
+                    const learnerIds = classes.data[i].learnerIds;
+                    const trainerId = classes.data[i].trainerId;
+                    
+                    //console.log(classSize,courseClassId,startDateTime)
+                    const courseClasses = document.getElementById("classes");
+                    var trainer_name = localStorage.getItem("name");
+                    var course_id = localStorage.setItem("courseId", courseClassId);
+                    const div = document.createElement("div");
+                    div.innerHTML = `        <div class = 'container-fluid course-details'>
+                            <div class = 'row'>
+                                <div class = 'col-md-4'>
+                                    Start Date: `+startDateTime+` <br>
+                                    End Date: `+endDateTime+` <br>
+                                    Trainer: `+trainer_name+` <br>
+                                    Course Occupancy: `+classSize+`
+                                </div>
+                                <div class = 'col-md-6'>
+                                    Prerequisites: 
+                                    <ul>
+                                        <li>PRT111: Introduction to Printing</li>
+                                        <li>PRT222: Simple Printing Configuration</li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <br>
+                        </div>`
+                    courseClasses.appendChild(div);
+                                    
+                  }
+              }
+          };
+          request.open("GET", "http://192.168.1.11:5000/class/"+ classId, true);
+          request.send();
+        }
+
+        function getCourseName(courseId){
+            const request = new XMLHttpRequest();
+            request.onreadystatechange = function(){
+                if (this.readyState == 4 && this.status ==200){
+                    let info = JSON.parse(this.responseText);
+                    console.log(info);
+                    // const courseName = info.data.name;
+                    // var name = localStorage.setItem("course_name", courseName)
+                }
+            }
+            request.open("GET", "http://192.168.1.11:5000/course/id/"+ courseId, true);
+            request.send();
+        }
+        
+    </script>
   </body>
 </html>
