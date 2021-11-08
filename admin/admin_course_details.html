@@ -78,7 +78,7 @@
       <a href="../admin/admin_course.html"><img src = 'https://cdn-icons-png.flaticon.com/512/2232/2232688.png' class = 'navbar-icons'>Courses</a>
       <a href="../admin/admin_users.html"><img src = 'https://cdn-icons-png.flaticon.com/512/2922/2922510.png' class = 'navbar-icons'>Users</a>
       <a href="#"><img src = 'https://cdn-icons-png.flaticon.com/512/3132/3132084.png' class = 'navbar-icons'>Settings</a>
-      <a href="../general/landing.html" button type="button" class="btn btn-outline-danger log-out">Log Out</button></a>
+      <a href="../general/landing.html" button type="button" class="btn btn-outline-danger log-out" onclick="localStorage.clear()">Log Out</button></a>
     </div>
 
     <a href = '../admin/admin_course.html'><img src = "https://cdn-icons-png.flaticon.com/512/786/786399.png" class = 'back-icon'></a>
@@ -129,5 +129,60 @@
         </div>
         
     </div>
+    <script>
+        window.onload = retrieveCourseInfo(); 
+
+        function retrieveCourseInfo(){
+        const request = new XMLHttpRequest();
+        request.onreadystatechange = function() {
+            if(this.readyState == 4 && this.status == 200) {
+                let Courses = JSON.parse(this.responseText);
+                
+                //   console.log(Courses.data.courses);
+                
+                for (i=0; i< Object.keys(Courses.data.courses).length;i ++){
+                    const courseDesc = Courses.data.courses[i].courseDesc;
+                    const courseId = Courses.data.courses[i].courseId;
+                    const courseName = Courses.data.courses[i].courseName;
+                    const isActive = Courses.data.courses[i].isActive;
+                    if (isActive == 0){
+                        var status = "Inactive"
+                    }
+                    else if (isActive == 1){
+                        var status = "Active"
+                    }
+                    const prerequisites = Courses.data.courses[i].prerequisites;
+                    //   console.log(courseDesc, courseId, courseName, status, prerequisites)
+
+                    const course = document.getElementById("course");
+
+                    const div = document.createElement("div");
+                    div.innerHTML = `                
+                    <div class = "container">
+                        <div class = "row">
+                            <div class = "col-md-2">
+                                <img src = "https://cdn-icons-png.flaticon.com/512/1497/1497542.png" style="width: 100px; height: 100px; position: inherit; margin: 20px;"> 
+                            </div>
+            
+                            <div class = 'col-md-8'>
+                                <b>`+courseId+` : `+courseName+`</b><br><br>
+                                Description: `+courseDesc+`<br>
+                                Status: `+status+`<br>
+                                Prerequisites: `+prerequisites+`<br>
+                            </div>
+                            
+                            <div class = 'col-md-1'>
+                                <a href = '../admin/admin_course_details.html' button type="button" class="btn btn-outline-success" style="float: right; border-radius: 20px; margin-left: 20px; margin-top: 100%;">Details</button></a>
+                            </div>
+                        </div>
+                    </div>`
+                    course.appendChild(div);
+                }
+            }
+        };
+        request.open("GET", "http://10.124.0.161:5000/courses", true);
+        request.send();
+        }
+    </script>
   </body>
 </html>
