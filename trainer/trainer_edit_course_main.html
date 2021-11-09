@@ -115,7 +115,7 @@
                 }
             }
             retrieveClasses(userId);
-            request.open("GET", "   http://192.168.50.157:5000/user/id/"+ userId, true);
+            request.open("GET", "http://54.80.18.11:5000/user/id/"+ userId, true);
             request.send();
             
         }
@@ -168,7 +168,7 @@
                   }
               }
           };
-          request.open("GET", "http://192.168.50.157:5000/class/trainer/"+ userId, true);
+          request.open("GET", "http://54.80.18.11:5000/class/trainer/"+ userId, true);
           request.send();
         }
 
@@ -182,7 +182,7 @@
                     localStorage.setItem("courseName",courseName);
                 }
             }
-            request.open("GET", "http://192.168.50.157:5000/course/id/"+ courseId, true);
+            request.open("GET", "http://54.80.18.11:5000/course/id/"+ courseId, true);
             request.send();
         }
     </script>
