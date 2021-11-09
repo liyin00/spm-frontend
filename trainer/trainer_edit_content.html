@@ -319,7 +319,11 @@
                 // send post request
                 fetch('http://54.80.18.11:5000/quiz/update', options)
                     .then(res => res.json())
-                    .then(res => console.log(res))
+                    //.then(res => console.log(res))
+                    .then(res => {
+                        console.log(res)
+                        alert("You have published the Quiz " +quizId)
+                    })
                     .catch(err => console.error(err));
                 
         }
