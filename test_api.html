@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<!-- These test cases were written by Ling Li Yin.  -->
+<html>
+    <head>
+        <link rel="stylesheet" href="./stylesheets/style.css"> 
+    </head>
+
+    <body>
+        <div id="trainerName"></div>
+        <div id = "classInfo"></div>
+        <div id = "courseInfo"></div>
+        <div id = "allCoursesByTrainer"></div>
+        <div id = "quizContent"></div>
+        <div id = "allClassesUnderCourses"></div>
+        <div id = "lessonContents"></div>
+        <script>
+            const testUserId = 2 
+            const testClassId = 1
+            const testCourseId = 1
+            const testLessonId = 1 
+            window.onload = getUserInfo(testUserId); retrieveClassInfo(testClassId); retrieveCourseInfo(testCourseId); retrieveAllClasses(testUserId); retrieveQuizContents(testLessonId); retrieveClasses(testClassId); retrieveLessonContents(testClassId);
+            var count_success = 0
+            var count_failure = 0 
+
+            function getUserInfo(userId){
+                const request = new XMLHttpRequest();
+                request.onreadystatechange = function(){
+                    if (this.readyState == 4 && this.status ==200){
+                        let info = JSON.parse(this.responseText);
+                        // console.log(info);
+                        const userName = info.data.name;
+                        const department = info.data.department;
+                        const email = info.data.email;
+                        const subrole = info.data.subrole;
+                        const userId = info.data.userId;
+                        if (userName == "weijie" && department == "engineering" && email == "weijie.goh@all-in-one.com" && subrole == "learner" && userId == 2){
+                            count_success ++;
+                            const trainerNameLocation = document.getElementById("trainerName");
+                            const trainerdiv = document.createElement("div");
+                            trainerdiv.innerHTML = 
+                            `<h3>
+                                Trainer Name ran successfully!<br>
+                            </h3>`
+                            trainerNameLocation.appendChild(trainerdiv);
+                        }
+                        else{
+                            const trainerNameLocation = document.getElementById("trainerName");
+                            const trainerdiv = document.createElement("div");
+                            trainerdiv.innerHTML = 
+                            `<h1>
+                                Trainer Name test failed!<br>
+                            </h1>`
+                            trainerNameLocation.appendChild(trainerdiv);
+                        }
+                    }
+                }
+                request.open("GET", "http://54.80.18.11:5000/user/id/"+ userId, true);
+                request.send();
+            }
+
+            function retrieveClassInfo(classId){
+            const request = new XMLHttpRequest();
+            request.onreadystatechange = function() {
+                if(this.readyState == 4 && this.status == 200) {
+                    let classes = JSON.parse(this.responseText);
+                    for (i=0; i< Object.keys(classes.data).length;i ++){
+                        const classSize = classes.data[i].classSize;
+                        const courseClassId = classes.data[i].courseClassId;
+                        const courseId = classes.data[i].courseId;
+                        const startDateTime = classes.data[i].startDateTime;
+                        const endDateTime = classes.data[i].endDateTime;
+                        const learnerIds = classes.data[i].learnerIds;
+                        const trainerId = classes.data[i].trainerId;
+
+                        //console.log(classSize,courseClassId,startDateTime)
+                        if (classSize == 10 && courseClassId==1 && courseId == 1 && endDateTime == "Sat, 09 Oct 2021 00:00:00 GMT" && learnerIds == "{'1': 1, '2':0, '3':1}" && startDateTime == "Fri, 08 Oct 2021 00:00:00 GMT" && trainerId == 1){
+                            count_success ++;
+                            const classInfoLocation = document.getElementById("classInfo");
+                            const classInfoDiv = document.createElement("div");
+                            classInfoLocation.innerHTML = 
+                            `<h3>
+                                Get class info ran successfully!<br>
+                            </h3>`
+                            classInfoLocation.appendChild(classInfoDiv);
+                        }
+                        else{
+                            count_failure ++;
+                            const classInfoLocation = document.getElementById("classInfo");
+                            const classInfoDiv = document.createElement("div");
+                            classInfoLocation.innerHTML = 
+                            `<h3>
+                                Get class info ran successfully!<br>
+                            </h3>`
+                            classInfoLocation.appendChild(classInfoDiv);
+                        }
+                                        
+                    }
+                }
+            };
+            request.open("GET", "http://54.80.18.11:5000/class/"+ classId, true);
+            request.send();
+            }
+
+            function retrieveCourseInfo(courseId){
+                const request = new XMLHttpRequest();
+                request.onreadystatechange = function(){
+                    if (this.readyState == 4 && this.status ==200){
+                        let info = JSON.parse(this.responseText);
+                        const courseName = info.data.courseName;
+                        const courseDesc = info.data.courseDesc;
+                        const isActive = info.data.isActive;
+                        const prerequisites = info.data.prerequisites;
+                        if (courseDesc == "Testing testing testing" && courseId == 1 && courseName == "HP 111: Introduction to InkJet Series" && isActive == 1 && prerequisites == ""){
+                            count_success ++;
+                            const courseInfoLocation = document.getElementById("courseInfo");
+                            const courseInfoDiv = document.createElement("div");
+                            courseInfoLocation.innerHTML = 
+                            `<h3>
+                                Get course info ran successfully!<br>
+                            </h3>`
+                            courseInfoLocation.appendChild(courseInfoDiv);
+                        }
+                        else{
+                            count_failure ++;
+                            const courseInfoLocation = document.getElementById("courseInfo");
+                            const courseInfoDiv = document.createElement("div");
+                            courseInfoLocation.innerHTML = 
+                            `<h3>
+                                Get course info did not run successfully<br>
+                            </h3>`
+                            courseInfoLocation.appendChild(courseInfoDiv);
+                        }
+
+                    }
+
+                }
+                request.open("GET", "http://54.80.18.11:5000/course/id/"+ courseId, true);
+                request.send();
+            }
+
+            function retrieveAllClasses(userId){
+                const request = new XMLHttpRequest();
+                request.onreadystatechange = function() {
+                    if(this.readyState == 4 && this.status == 200) {
+                        let classes = JSON.parse(this.responseText);
+                        // console.log(classes.data.classes);
+                        const classSize = classes.data.classes[0].classSize;
+                        const courseClassId = classes.data.classes[0].courseClassId;
+                        const startDateTime = classes.data.classes[0].startDateTime;
+                        const endDateTime = classes.data.classes[0].endDateTime;
+                        const learnerIds = classes.data.classes[0].learnerIds;
+                        const trainerId = classes.data.classes[0].trainerId;
+                        const courseId = classes.data.classes[0].courseId;
+                        console.log(classSize, courseClassId, startDateTime)
+                        if (classSize == 15 && courseClassId == 2 && courseId==1 && endDateTime == "Sun, 10 Oct 2021 00:00:00 GMT" && startDateTime == "Fri, 08 Oct 2021 00:00:00 GMT" && trainerId == 2){
+                            count_success +=1;
+                            const courses = document.getElementById("allCoursesByTrainer");
+                            const div = document.createElement("div");
+                            div.innerHTML = 
+                            `<h3>
+                            Get classes by trainer ran successfully!<br>
+                            </h3>`
+                            courses.appendChild(div);   
+                        }
+                        else{
+                            count_failure ++
+                            const courses = document.getElementById("allCoursesByTrainer");
+                            const div = document.createElement("div");
+                            courses.innerHTML = 
+                            `<h3>
+                                Get classes by trainer did not run successfully!<br>
+                            </h3>`
+                            courses.appendChild(div);
+                        }
+                        
+                    }
+                };
+                request.open("GET", "http://54.80.18.11:5000/class/trainer/"+ userId, true);
+                request.send();
+                }
+          
+            function retrieveQuizContents(lessonId){
+                const request = new XMLHttpRequest();
+                request.onreadystatechange = function() {
+                    if(this.readyState == 4 && this.status == 200) {
+                        let quizContents = JSON.parse(this.responseText);
+                        const isActive = quizContents.data.quizzes[0].isActive;
+                        const lessonId = quizContents.data.quizzes[0].lessonId;
+                        const isGraded = quizContents.data.quizzes[0].isGraded;
+                        const quizLink = quizContents.data.quizzes[0].quizLink;
+                        const numOfQns = quizContents.data.quizzes[0].numOfQns;
+                        const quizId = quizContents.data.quizzes[0].quizId;
+                        const passingMark = quizContents.data.quizzes[0].passingMark;
+        
+                        //console.log(classSize,courseClassId,startDateTime)
+                        const quizContent = document.getElementById("contents");
+                        if (isActive == "True" && isGraded == 1 && lessonId == 1 && numOfQns == 14 && passingMark == 7 && quizId == 1 && quizLink == "https://www.quiz-maker.com/QJD4SEU72"){
+                            count_success +=1;
+                            const quizContentLocation = document.getElementById("quizContent");
+                            const div = document.createElement("div");
+                            div.innerHTML = 
+                            `<h3>
+                            Get quiz contents ran successfully!<br>
+                            </h3>`
+                            quizContentLocation.appendChild(div);   
+                        }
+                        else{
+                            count_failure ++
+                            const quizContentLocation = document.getElementById("quizContent");
+                            const div = document.createElement("div");
+                            quizContentLocation.innerHTML = 
+                            `<h3>
+                                Get quiz contents did not run successfully<br>
+                            </h3>`
+                            quizContentLocation.appendChild(div);
+                        }
+                    }
+                };
+                request.open("GET", "http://54.80.18.11:5000/quiz/lessonId/"+lessonId, true);
+                request.send();
+            }
+
+            function retrieveClasses(courseClass){
+                const request = new XMLHttpRequest();
+                request.onreadystatechange = function() {
+                    if(this.readyState == 4 && this.status == 200) {
+                        let classes = JSON.parse(this.responseText);
+                        const classSize = classes.data.classes[2].classSize;
+                        const courseClassId = classes.data.classes[2].courseClassId;
+                        const startDateTime = classes.data.classes[2].startDateTime;
+                        const endDateTime = classes.data.classes[2].endDateTime;
+                        const learnerIds = classes.data.classes[2].learnerIds;
+                        const trainerId = classes.data.classes[2].trainerId;
+                        const courseName = classes.data.info[2][0];
+                        const trainerName = classes.data.info[2][1];
+                        
+                        if (classSize == 10 && courseClassId == 3 && endDateTime == "Sun, 10 Oct 2021 00:00:00 GMT" && startDateTime == "Fri, 08 Oct 2021 00:00:00 GMT" && trainerId == 2){
+                            count_success ++;
+                            const courseClasses = document.getElementById("allClassesUnderCourses");
+                            const div = document.createElement("div");
+                            div.innerHTML = `<h3>
+                            Get classes by course ran successfully!<br>
+                            </h3>`
+                            courseClasses.appendChild(div);
+                        }
+                        //console.log(classSize,courseClassId,startDateTime)
+                        else{
+                            count_failure ++;
+                            const courseClasses = document.getElementById("allClassesUnderCourses");
+                            const div = document.createElement("div");
+                            div.innerHTML = `<h3>
+                            Get classes by course did not run successfully!<br>
+                            </h3>`
+                            courseClasses.appendChild(div);
+                        }
+                                            
+                        
+                    }
+
+                };
+                request.open("GET", "http://54.80.18.11:5000/class/course/"+courseClass, true);
+                request.send();
+                }
+                  
+            function retrieveLessonContents(courseClassId){
+                const request = new XMLHttpRequest();
+                request.onreadystatechange = function() {
+                    if(this.readyState == 4 && this.status == 200) {
+                        let lessonContents = JSON.parse(this.responseText);
+                        const lessonName = lessonContents.data.lessons[0].lessonName;
+                        const lessonContent = lessonContents.data.lessons[0].lessonContent;
+                        const links = lessonContents.data.lessons[0].links;
+                        const lessonId = lessonContents.data.lessons[0].lessonId;
+                    }
+                    if (courseClassId == 1 && lessonContent == ["A beginner's guide to InkJet Series", "An intermediate guide to InkJet Series"] && lessonId == 1 && lessonName == "HP 111: Introduction to InkJet Series" && links == ["https://drive.google.com/drive/u/1/folders/1_9UZxwBySmZ5JzPFkx5Kl9Ih3QddGSZI", "https://drive.google.com/drive/u/1/folders/10eUbk5FG76U-nk9f9-0KIemnmo3oWcU6"]){
+                        count_success ++;
+                        const lesson = document.getElementById("lessonContents");
+                        const div = document.createElement("div");
+                        div.innerHTML = `<h3>
+                        Get lesson by class ran successfully!<br>
+                        </h3>`
+                        lesson.appendChild(div);
+                    }
+                    else{
+                        count_failure ++;
+                        const lesson = document.getElementById("lessonContents");
+                        const div = document.createElement("div");
+                        div.innerHTML = `<h3>
+                        Get lesson by class did not run successfully!<br>
+                        </h3>`
+                        lesson.appendChild(div);
+                    }
+                }; 
+                request.open("GET", "http://54.80.18.11:5000/lessons/"+courseClassId, true);
+                request.send();
+                }
+        </script>
+    </body>
+</html>
+
+

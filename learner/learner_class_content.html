@@ -46,7 +46,7 @@
         <a href="../general/landing.html" button type="button" class="btn btn-outline-danger log-out" onclick="localStorage.clear()">Log Out</button></a>
       </div>
 
-    <a href = '../trainer/trainer_edit_course_main.html'><img src = "https://cdn-icons-png.flaticon.com/512/786/786399.png" class = 'back-icon'></a>
+    <a href = '../learner/learner_enrolled_course.html'><img src = "https://cdn-icons-png.flaticon.com/512/786/786399.png" class = 'back-icon'></a>
 
     <!-- title  -->
     <div id="contents" style="margin-left: 25%;">
@@ -117,7 +117,7 @@
                   }
               }
           };
-          request.open("GET", "http://192.168.50.157:5000/lessons/"+courseClassId, true);
+          request.open("GET", "http://54.80.18.11:5000/lessons/"+courseClassId, true);
           request.send();
         }
 
@@ -157,7 +157,7 @@
                   }
               }
           };
-          request.open("GET", "http://192.168.50.157:5000/lessons/"+courseClassId, true);
+          request.open("GET", "http://54.80.18.11:5000/lessons/"+courseClassId, true);
           request.send();
         }
     </script>

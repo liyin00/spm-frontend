@@ -317,9 +317,13 @@
                 }
 
                 // send post request
-                fetch('http://192.168.50.157:5000/quiz/update', options)
+                fetch('http://54.80.18.11:5000/quiz/update', options)
                     .then(res => res.json())
-                    .then(res => console.log(res))
+                    //.then(res => console.log(res))
+                    .then(res => {
+                        console.log(res)
+                        alert("You have published the Quiz " +quizId)
+                    })
                     .catch(err => console.error(err));
                 
         }
@@ -359,37 +363,10 @@
                     }
                 }
             };
-            request.open("GET", "http://192.168.50.157:5000/quiz/lessonId/"+lessonId, true);
+            request.open("GET", "http://54.80.18.11:5000/quiz/lessonId/"+lessonId, true);
             request.send();
 
             }
-
-//         function releaseQuiz(){
-//             document.getElementById("release-quiz").style.display = 'block';
-//             const json = {
-//                 "quizId": 1,
-//                 "lessonId": 1,
-//                 "isGraded": 1,
-//                 "passingMark": 7,
-//                 "numOfQns": 14,
-//                 "quizLink": "test",
-//                 "isActive": 'True'
-//             };
-
-//             const options = {
-//                 method: 'POST',
-//                 body: JSON.stringify(json ),
-//                 headers: {
-//                     'Content-Type': 'application/json'
-//                 }
-//             }
-
-//             // send post request
-//             fetch('http://10.124.135.51:5000/quiz/update', options)
-//                 .then(res => res.json())
-//                 .then(res => console.log(res))
-//                 .catch(err => console.error(err));
-//         }
 
         function createQuiz(){
             window.location.replace("../trainer/trainer_new_quiz.html")

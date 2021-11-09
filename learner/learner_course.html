@@ -154,7 +154,7 @@
                                                 </div>
                                                 
                                                 <div class = 'col-md-1'>
-                                                    <a href = '#' onclick=setCourseClassId(`+courseClassId+`) button type="button" class="btn btn-outline-success" style="float: right; border-radius: 20px; margin-left: 20px; margin-top: 100%;">Register</button></a>
+                                                    <a href = '#' onclick=setCourseClassId(`+courseClassId+`) id="register" button type="button" class="btn btn-outline-success" style="float: right; border-radius: 20px; margin-left: 20px; margin-top: 100%;">Register</button></a>
                                                 </div>
                                             </div>
                                         </div>
@@ -164,13 +164,35 @@
                   }
               }
           };
-          request.open("GET", "http://192.168.50.157:5000/class/course/"+courseClass, true);
+          request.open("GET", "http://54.80.18.11:5000/class/course/"+courseClass, true);
           request.send();
         }
 
-        function setCourseClassId(id) {
-            console.log(id);
-            localStorage.setItem("courseClassId", id);
+        function setCourseClassId(courseClassId) {
+            console.log(courseClassId);
+            //localStorage.setItem("courseClassId", id);
+            const json = {
+                "courseClassId": courseClassId,
+                "learnerId": localStorage.userId
+            };
+
+            const options = {
+                method: 'POST',
+                body: JSON.stringify(json ),
+                headers: {
+                    'Content-Type': 'application/json'
+                }
+            }
+
+            // send post request
+            fetch('http://54.80.18.11:5000/class/add/learner', options)
+                .then(res => res.json())
+                //.then(res => console.log(res))
+                .then(res => {
+                    console.log(res)
+                    alert("You have registered for a course!")
+                })
+                .catch(err => console.error(err));
         }
 
     </script>
