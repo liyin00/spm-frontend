@@ -317,7 +317,7 @@
                 }
 
                 // send post request
-                fetch('http://192.168.50.157:5000/quiz/update', options)
+                fetch('http://54.80.18.11:5000/quiz/update', options)
                     .then(res => res.json())
                     .then(res => console.log(res))
                     .catch(err => console.error(err));
@@ -359,17 +359,10 @@
                     }
                 }
             };
-            request.open("GET", "http://192.168.50.157:5000/quiz/lessonId/"+lessonId, true);
+            request.open("GET", "http://54.80.18.11:5000/quiz/lessonId/"+lessonId, true);
             request.send();
 
             }
-
-            // send post request
-            fetch('http://54.80.18.11:5000/quiz/update', options)
-                .then(res => res.json())
-                .then(res => console.log(res))
-                .catch(err => console.error(err));
-        }
 
         function createQuiz(){
             window.location.replace("../trainer/trainer_new_quiz.html")
