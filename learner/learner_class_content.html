@@ -117,7 +117,7 @@
                   }
               }
           };
-          request.open("GET", "http://10.124.135.51:5000/lessons/"+courseClassId, true);
+          request.open("GET", "http://192.168.50.157:5000/lessons/"+courseClassId, true);
           request.send();
         }
 
@@ -127,7 +127,7 @@
               if(this.readyState == 4 && this.status == 200) {
                   //console.log("entered");
                   let lessonContents = JSON.parse(this.responseText);
-                  //console.log(lessonContents);
+                  console.log(lessonContents);
                   
                   //console.log(lessonContents.data.lessons);
                   
