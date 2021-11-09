@@ -119,9 +119,30 @@
         
       }
 
-      function acceptLearner(){
-        alert(event.srcElement.id);
+      function acceptLearner(requestUserId,requestClassId){
+        console.log(requestUserId,requestClassId);
+        const json = {
+                       "courseClassId": requestClassId,
+                       "learnerId": requestUserId
+                };
 
+                const options = {
+                    method: 'POST',
+                    body: JSON.stringify(json ),
+                    headers: {
+                        'Content-Type': 'application/json'
+                    }
+                }
+
+                // send post request
+                fetch('http://54.80.18.11:5000/class/add/learner', options)
+                    .then(res => res.json())
+                    //.then(res => console.log(res))
+                    .then(res => {
+                        console.log(res)
+                        alert("Approval Success!")
+                    })
+                    .catch(err => console.error(err));
       }
 
       function retrieveAllClasses(){
@@ -142,7 +163,7 @@
                   <div class = "registrations">
                     <img src = "https://cdn-icons-png.flaticon.com/512/1077/1077012.png" class = 'user-icon'> 
                     <b style="margin-left: 10px;">`+requestUserName+` </b>
-                    <button type="button" class="btn btn-outline-success approve" onclick="acceptLearner()" id = '`+requestUserId+`_`+requestClassId+`'>Approve</button>
+                    <button type="button" class="btn btn-outline-success approve" onclick="acceptLearner(`+requestUserId+`,`+requestClassId+`)" id = '`+requestUserId+`_`+requestClassId+`'>Approve</button>
                     <img src = 'https://cdn-icons-png.flaticon.com/512/1828/1828665.png' class = 'reject'>
                   </div>
                 `
